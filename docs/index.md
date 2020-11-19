@@ -1,6 +1,4 @@
-# Welcome to MkDocs
-
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+# Welcome to Hazen.ai System Documentation
 
 ## Image Cache
 
@@ -27,10 +25,56 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
 ## Object Detector
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+* `stream_type` - 
+* `stream_address` -
+* `sitename_camname` - 
+* `timezone_of_video_file` - 
+* `timeout_to_read_frame_sec` - 
+* `delay_to_getframe_ms` -
+* `jpeg_encoded`
+* `pre_processor_type` -
+* `img_resize_width` - 
+* `img_resize_height` -
+* `change_color_space_to_rgb` -
+* `increase_larger_side_by_factor` -
+* `increase_smaller_side_by_factor` -
+* `std_for_preprocess_img` -
+* `mean_for_preprocess_img` -
+* `traffic_light_config` - 
+* `do_resize_in_preprocessor` - 
+* `infer_type` - 
+* `output_node_ids` - 
+* `engine_file_path` -
+* `batch_size` - 
+* `trt_gpu_workspace_size` - 
+* `enable_trt_preprocessor` -
+* `trt_preprocessor_input_dims` - 
+* `image_dims_infer_engine` -
+* `post_processor_type` -
+* `all_states` -
+* `class_map` -
+* `state_machine_type` -
+* `yellow_ticks_statemachine` -
+* `yellow_tol_statemachine` -
+* `green_th_state_statemachine` -
+* `invalid_th_statemachine` -
+* `yellow_floor_th_statemachine` -
+* `yellow_ceil_th_statemachine` -
+* `yellow_hist_buffer_statemachine` -
+* `thres_hold_statemachine` -
+* `group_count` -
+* `lights_per_group` -
+* `classification_threshold` -
+* `sensor_fusion_type` -
+* `debug_log` -
+* `redis_host` -
+* `redis_port` -
+* `connection_timeout_secs` -
+* `topic` -
+* `output_type` -
+* `group1_queue_id` -
+* `group2_queue_id` -
+* `config_trigger_queue` -
 
 ## Object Tracker
 
