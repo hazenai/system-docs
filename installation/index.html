@@ -58,6 +58,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#running-the-edge-script">Running the Edge Script</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#running-the-services">Running the services</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -160,6 +162,13 @@ Select Power Model. ID: 2
 <ul>
 <li>Now, script will start installing system dependencies.</li>
 <li>After system dependencies installation, script will install required services. This process may take <code>20-30 mins</code>.</li>
+</ul>
+<h2 id="running-the-services">Running the services</h2>
+<ul>
+<li>Move to following directory <code>cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/</code>. For example, in this case, I will move to
+<code>cd /media/sdcard/hazen-test/imagetars/hazenclient/</code></li>
+<li>Run the following command <code>sudo cp -r ./sbmp/* ./</code></li>
+<li>Now, Run the services <code>sudo ./run-services.sh</code></li>
 </ul>
               
             </div>
