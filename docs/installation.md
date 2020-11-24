@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-* Edge device is flashed with Nvidia `JetPack 4.4.0`
+* Edge device is flashed with Nvidia `JetPack 4.4.0` (Make sure Jetson SDK Components are also installed)
 * Internet
 
 ## Edge Script Installtion
