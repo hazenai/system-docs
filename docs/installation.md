@@ -62,3 +62,10 @@ Select Power Model. ID: 2
 * Now, script will start installing system dependencies.
 * After system dependencies installation, script will install required services. This process may take `20-30 mins`.
 
+## Running the services
+
+* Move to following directory `cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/`. For example, in this case, I will move to
+`cd /media/sdcard/hazen-test/imagetars/hazenclient/`
+* Run the following command `sudo cp -r ./sbmp/* ./`
+* Now, Run the services `sudo ./run-services.sh`
+
