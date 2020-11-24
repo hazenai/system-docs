@@ -1,5 +1,10 @@
 # Basic Installation Guide for Seatbelt and Mobile phone System Deployment
 
+## Prerequisites
+
+* Edge device is flashed with Nvidia `JetPack 4.4.0`
+* Internet
+
 ## Edge Script Installtion
 
 * Power Up your edge device and connect keyboard, mouse, monitor etc.
