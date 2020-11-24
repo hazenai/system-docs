@@ -99,6 +99,17 @@
 <li>Power Up your edge device and connect keyboard, mouse, monitor etc.</li>
 <li>Open terminal <code>CTRL + ALT + T</code>.</li>
 <li>Check if <code>python3</code> is installed on device. If not <a href="https://phoenixnap.com/kb/how-to-install-python-3-ubuntu">follow this link to install</a></li>
+<li>Check if nvidia-container-runtime is installed <code>nvidia-container-runtime --version</code>. If it's not installed, then install</li>
+</ul>
+<pre><code class="language-bash"># Add the package repositories
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+# nvidia-container-runtime installation
+sudo apt-get update &amp;&amp; sudo apt-get install -y nvidia-container-toolkit nvidia-container-runtime
+sudo systemctl restart docker
+</code></pre>
+<ul>
 <li>Download Edge Scripts <code>wget GET_LINK_FROM_ABDULLAH</code></li>
 <li>Uncompress the downloaded file <code>tar -xvzf AutoDeployment-1.2.0.tar.gz</code></li>
 <li>Change directory <code>cd AutoDeployment-1.2.0/edge/</code>. Check if <code>install.py</code> and <code>dependencies.yaml</code> is present.</li>
