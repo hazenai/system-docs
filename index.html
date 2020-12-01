@@ -134,40 +134,40 @@
 <li><code>timeout_to_read_frame_sec</code> - timeout value in seconds if the frame reading process from source is interrupted</li>
 <li><code>delay_to_getframe_ms</code> - value in milliseconds to slow down frame reading process.</li>
 <li><code>jpeg_encoded</code> - set to true if jpeg encoding is used in image-cache.</li>
-<li><code>pre_processor_type</code> - specify the preprocessor you want to use depend upon the problem. possible values are traffic, seatbelt_mobilephone and trajectory.</li>
+<li><code>pre_processor_type</code> - specify the preprocessor you want to use depend upon the problem. possible values are <code>traffic</code>, <code>seatbelt_mobilephone</code> and <code>trajectory</code>.</li>
 <li><code>img_resize_width</code> - set width to which you want to resize image in 'traffic' preprocessor.</li>
 <li><code>img_resize_height</code> - set height to which you want to resize image in 'traffic' preprocessor.</li>
 <li><code>change_color_space_to_rgb</code> - set true if want to change BGR image to RGB.</li>
-<li><code>increase_larger_side_by_factor</code> - 0.25 only for TLPD, to increase BBox of traffic light.</li>
-<li><code>increase_smaller_side_by_factor</code> - 0.25 only for TLPD, to increase BBox of traffic light.</li>
-<li><code>std_for_preprocess_img</code> - [0.229, 0.224, 0.225], set values to perform std of image. only for TLPD</li>
-<li><code>mean_for_preprocess_img</code> - [0.229, 0.224, 0.225], set values to perform mean of image. only for TLPD</li>
+<li><code>increase_larger_side_by_factor</code> - default 0.25, only for TLPD, to increase BBox of traffic light.</li>
+<li><code>increase_smaller_side_by_factor</code> - default 0.25, only for TLPD, to increase BBox of traffic light.</li>
+<li><code>std_for_preprocess_img</code> - default [0.229, 0.224, 0.225], set values to perform std of image. only for TLPD</li>
+<li><code>mean_for_preprocess_img</code> - default [0.229, 0.224, 0.225], set values to perform mean of image. only for TLPD</li>
 <li><code>traffic_light_config</code> - path to trafficlights.json file.</li>
 <li><code>do_resize_in_preprocessor</code> - set true if you want to do resizing in preprocessor.</li>
-<li><code>infer_type</code> - 'tensorrt' for gpu based inference and openvino20 for cpu based infer.</li>
+<li><code>infer_type</code> - default 'tensorrt' for gpu based inference and openvino20 for cpu based infer.</li>
 <li><code>output_node_ids</code> - only for openvino20 infer, depends upon engine.</li>
 <li><code>engine_file_path</code> - path to engine file without extensions.</li>
 <li><code>batch_size</code> - batch size passed to inference.</li>
-<li><code>trt_gpu_workspace_size</code> - '2.4' set trt gpu workspace size in Gibs</li>
+<li><code>trt_gpu_workspace_size</code> - default '2.4' set trt gpu workspace size in Gibs</li>
 <li><code>enable_trt_preprocessor</code> - set true if want to perform gpu based preprocessing.</li>
-<li><code>trt_preprocessor_input_dims</code> - [1080,1920,3] image dims, passed to gpu preprocessor in NHWC format.</li>
-<li><code>image_dims_infer_engine</code> - [3,1080,1980] image dims on which main infer engine will work in NCHW format.</li>
-<li><code>post_processor_type</code> - postprocessor you want. possible values are tlstatus, seatbelt_mobilephone and trajectory</li>
+<li><code>trt_preprocessor_input_dims</code> - default [1080,1920,3] image dims, passed to gpu preprocessor in NHWC (Height, Width, channels) format.</li>
+<li><code>image_dims_infer_engine</code> - default [3,1080,1980] image dims on which main infer engine will work in NCHW (channels, width, Height) format.</li>
+<li><code>post_processor_type</code> - postprocessor you want. possible values are <code>tlstatus</code>, <code>seatbelt_mobilephone</code> and <code>trajectory</code></li>
 <li><code>all_states</code> - ["red", "green", "yellow", "black"], only for tlstatus to represent all states of trafficlight.</li>
 <li><code>class_map</code> - "0,1,2,3|black,green,red,yellow" To represent infer result with respective classes. Before '|' is output of infer and after are the respective classes.</li>
 <li><code>state_machine_type</code> - 'dynamic', only for tlstatus postprocessor. possible values dynamic and constant</li>
-<li><code>yellow_ticks_statemachine</code> - 18 only for tlstatus postprocessor</li>
-<li><code>yellow_tol_statemachine</code> - 5</li>
-<li><code>green_th_state_statemachine</code> - 2</li>
-<li><code>invalid_th_statemachine</code> - 10</li>
-<li><code>yellow_floor_th_statemachine</code> - 2</li>
-<li><code>yellow_ceil_th_statemachine</code> - 5</li>
-<li><code>yellow_hist_buffer_statemachine</code> - 10</li>
-<li><code>thres_hold_statemachine</code> - 1</li>
-<li><code>group_count</code> - 2, total groups of trafficlight.</li>
-<li><code>lights_per_group</code> - [5, 0], total lights per group.</li>
-<li><code>classification_threshold</code> - 0.45, classification threshold for tlstatus postprocessor</li>
-<li><code>sensor_fusion_type</code> - 'majority', possible values are mean and majority</li>
+<li><code>yellow_ticks_statemachine</code> - default 18, only for tlstatus postprocessor</li>
+<li><code>yellow_tol_statemachine</code> - default 5</li>
+<li><code>green_th_state_statemachine</code> - default 2</li>
+<li><code>invalid_th_statemachine</code> - default 10</li>
+<li><code>yellow_floor_th_statemachine</code> - default 2</li>
+<li><code>yellow_ceil_th_statemachine</code> - default 5</li>
+<li><code>yellow_hist_buffer_statemachine</code> - default 10</li>
+<li><code>thres_hold_statemachine</code> - default 1</li>
+<li><code>group_count</code> - default 2, total groups of trafficlight.</li>
+<li><code>lights_per_group</code> - default [5, 0], total lights per group.</li>
+<li><code>classification_threshold</code> - default 0.45, classification threshold for tlstatus postprocessor</li>
+<li><code>sensor_fusion_type</code> - default 'majority', possible values are mean and majority</li>
 <li><code>debug_log</code> - set true if want to see debug logs</li>
 <li><code>redis_host</code> - redis host on which redis-server is running</li>
 <li><code>redis_port</code> - port redis-server is running</li>
@@ -235,5 +235,5 @@
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2020-12-01 10:50:22.137028+00:00
+Build Date UTC : 2020-12-01 11:00:21.721344+00:00
 -->
