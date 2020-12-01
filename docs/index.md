@@ -107,3 +107,21 @@
 
 ## Publisher
 
+`package_receive_topic` -
+`edge_mqtt_address` -
+`edge_mqtt_port` -
+`package_receive_queue_qos` -
+`package_receive_queue_keep_alive` -
+`container_storage` -
+`cloud_mqtt_address` -
+`cloud_mqtt_port` -
+`cloud_publish_topic` -
+`cloud_queue_qos` -
+`cloud_queue_keep_alive` -
+`log_level` -
+`remote_publisher_enable_ssl` -
+`ca_certs` -
+`client_cert` -
+`client_key` -
+`redis_host` -
+`redis_port`
