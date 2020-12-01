@@ -82,5 +82,28 @@
 
 ## Aggregator
 
+* `camera_cache_mapping` -
+* `request_image_encoding` - Get image of specific encoding. Typical values are `jpg`, `png`. 
+* `request_image_offset_allowed_ms` -
+* `queue_address` -
+* `queue_port` -
+* `queue_qos` - 
+* `queue_keep_alive` - 
+* `queue_event_topic` -
+* `queue_violation_service_topic` - 
+* `queue_publisher_service_topic` -
+* `event_storage_expiry` -
+* `container_storage` -
+* `log_level` -
+* `generate_dummy_violation` -
+* `map_to_wrongturn` -
+* `map_to_runningredlight` -
+* `map_to_trespass_zebra` -
+* `map_to_cellphone` -
+* `map_to_seatbelt` -
+* `publish_violations` -
+* `redis_host` -
+* `redis_port` -
+
 ## Publisher
 
