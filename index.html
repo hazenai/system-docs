@@ -179,6 +179,25 @@
 <li><code>config_trigger_queue</code> - queue id on which OD will get notification about config change. (only for specific case)</li>
 </ul>
 <h2 id="object-tracker">Object Tracker</h2>
+<ul>
+<li><code>tracker_type</code> - default 'hazenv2'</li>
+<li><code>use_objectness_score</code> - For SBMP deployment use <code>False</code>, true otherwise</li>
+<li><code>tracked_classes</code> - Tracker will track these classes for label smoothing. <code>vehicle_type</code> for trajectory and <code>seatbelt|mobile_phone</code> for SBMP</li>
+<li><code>log_level</code> - default INFO, other value can be <code>DEBUG</code></li>
+<li><code>redis_host</code> - default 0.0.0.0, IP/domain of redis server</li>
+<li><code>redis_port</code> - default 6379, port at which redis server is accessible</li>
+<li><code>listen_topic</code> - tracker will subscribe to this topic for listening detections</li>
+<li><code>publish_topic</code> - tracker will publish tracks to this topic</li>
+<li><code>sigma_l (float)</code> - low score detection threshold</li>
+<li><code>sigma_iou (float)</code> - default -0.05</li>
+<li><code>sigma_len (int)</code> - minimum track length in frames</li>
+<li><code>sigma_p (int)</code> - maximum frames a track remains pending before termination</li>
+<li><code>sigma_h (float)</code> - At least one detection in a track should have score greater than this</li>
+<li><code>output_pending_tracks</code> - default False</li>
+<li><code>motion_model</code> - default 'cppkalman'</li>
+<li><code>association_model</code> - default 'hungarian'</li>
+<li><code>cost_model</code> - default 'iou'</li>
+</ul>
 <h2 id="violation-service">Violation Service</h2>
 <h2 id="aggregator">Aggregator</h2>
 <ul>
@@ -279,5 +298,5 @@
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2020-12-01 17:19:08.815833+00:00
+Build Date UTC : 2020-12-03 13:07:43.097094+00:00
 -->
