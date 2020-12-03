@@ -79,7 +79,7 @@
 ## Object Tracker
 
 * `tracker_type` - default 'hazenv2'
-* `use_objectness_score` - For SBMP deployment use `False`, true otherwise
+* `use_objectness_score` - For SBMP deployment use `False`, True otherwise
 * `tracked_classes` - Tracker will track these classes for label smoothing. `vehicle_type` for trajectory and `seatbelt|mobile_phone` for SBMP
 * `log_level` - default INFO, other value can be `DEBUG`
 * `redis_host` - default 0.0.0.0, IP/domain of redis server
