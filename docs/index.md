@@ -78,6 +78,24 @@
 
 ## Object Tracker
 
+* `tracker_type` - default 'hazenv2'
+* `use_objectness_score` - For SBMP deployment use `False`, true otherwise
+* `tracked_classes` - Tracker will track these classes for label smoothing. `vehicle_type` for trajectory and `seatbelt|mobile_phone` for SBMP
+* `log_level` - default INFO, other value can be `DEBUG`
+* `redis_host` - default 0.0.0.0, IP/domain of redis server
+* `redis_port` - default 6379, port at which redis server is accessible
+* `listen_topic` - tracker will subscribe to this topic for listening detections
+* `publish_topic` - tracker will publish tracks to this topic
+* `sigma_l (float)` - low score detection threshold
+* `sigma_iou (float)` - default -0.05
+* `sigma_len (int)` - minimum track length in frames
+* `sigma_p (int)` - maximum frames a track remains pending before termination
+* `sigma_h (float)` - At least one detection in a track should have score greater than this
+* `output_pending_tracks` - default False
+* `motion_model` - default 'cppkalman'
+* `association_model` - default 'hungarian'
+* `cost_model` - default 'iou'
+
 ## Violation Service
 
 ## Aggregator
