@@ -2,4 +2,5 @@ site_name: Deployment Config Documentation
 nav:
     - Config Documentation: index.md
     - Basic Installation: installation.md
+    - Flashing Instructions: flash.md
 theme: readthedocs
