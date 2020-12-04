@@ -105,7 +105,7 @@
 <li>Turn upside down the Axiomtek TX2 box and remove screws.</li>
 <li>Connect the micro usb cable from micro usb port on axiomtek TX2 (on CN7) to usb port on host device.</li>
 <li>Make the TX2 in recovery mode. See the process <a href="https://www.axiomtek.com/Download/download/eBOX800-900-FL/eBOX800-900-FL%20User's%20Manual%20VA1_12-17-2018.pdf">here</a></li>
-<li>On host device, run <code>sudo ./flash.sh jetson-tx2 mmcblk0p1</code>.</li>
+<li>On host device, run <code>sudo ./flash.sh -r jetson-tx2 mmcblk0p1</code>.</li>
 <li>Wait till flashing is down.</li>
 <li>Remove tx2 from recovery mode and enable it to boot from internal eMMC by rebooting.</li>
 </ul>
