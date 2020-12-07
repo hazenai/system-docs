@@ -11,9 +11,9 @@
 * `jpeg_encoding` - set to true if jpeg encoding is used in the pipeline
 * `size` - capacity of image cache in frames
 * `debug_log` - sets the debug log level to true or false, default log leve is INFO
-* `video_frame_rate` -  Image cache will automatically adjust the fps of video being written
-                        This parameter can be used to slow down or speed up fps
-                        e.g. 10 will speed up the fps by 10 and -10 will slow down
+* `video_frame_rate` -  Image cache will automatically adjust the fps of video being written. 
+                        This parameter can be used to slow down or speed up fps, 
+                        e.g. 10 will speed up the fps by 10 and -10 will slow down. 
                         default should be 0, if no change is required
 * `color` - color format of frames, can be true or false
 * `grpc_server_host` - default 0.0.0.0
@@ -107,15 +107,15 @@
 * `topic_for_tracker` - Violation service will subscribe to this topic to listen for track information sent by object tracker
 * `publish_topic` - Violation Service will publish violations information on this topic
 * `log_level` - Decides the log level of the service, can be `DEBUG` or `INFO`
-* `top_factor` - Weight given to top of the bounding box while calculating the localization point of a detection.
+* `top_factor` - Weight given to top of the bounding box while calculating the localization point of a detection. 
                  y-axis of point is top*height + (1-top)*height
-* `left_factor` - Weight given to left side of the bounding box while calculating the localization point of a detection.
+* `left_factor` - Weight given to left side of the bounding box while calculating the localization point of a detection. 
                   x-axis of point is left*width + (1-left)*height
 * `image_height` - Height of the annotated image 
 * `image_width` - Width of the annotated image
 * `alpr_video_duration_ms` - Duration of the `ALPR` video request made by aggregator
 * `fps` - Frame per second on which the system is running
-* `profiler_iterations` - Iterations of the profiler, after which service will exit and profiler results will be dumped in a text file
+* `profiler_iterations` - Iterations of the profiler, after which service will exit and profiler results will be dumped in a text file. 
                           This value should be `-1` if profiler results are not required and if service is required to run for the lifecycle of other services
 
 ## Aggregator
