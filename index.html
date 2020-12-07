@@ -114,14 +114,17 @@
 <ul>
 <li><code>sensor_type</code> - 'rtsp' is used for rtsp stream, file is used for video file source, roseek for roseek camera</li>
 <li><code>cam_id</code> - file path or stream addresss</li>
-<li><code>encoder</code> -  video reader encoder, supported values are "gstreamer", "ffmpeg" &amp; "v4l2" DEFAULT is "ffmpeg"</li>
-<li><code>hardware_wait_sec</code> - timeout value in seconds if the frame reading process from source is interrupted</li>
-<li><code>delay_for_rtsp_ms</code> - delay introduced in frames in case of video file, should be 0 for rtsp</li>
+<li><code>encoder</code> -  source reader encoder, supported values are "gstreamer", "ffmpeg" &amp; "v4l2" DEFAULT is "ffmpeg"</li>
+<li><code>frame_source_timeout_sec</code> - timeout value in seconds if the frame reading process from source is interrupted</li>
+<li><code>delay_for_file_ms</code> - delay introduced in frames in case of video file, should be 0 for rtsp</li>
 <li><code>source_frame_rate</code> - should only be set for ROSEEK, doesn't do anything in case of video file and rtsp stream</li>
 <li><code>jpeg_encoding</code> - set to true if jpeg encoding is used in the pipeline</li>
 <li><code>size</code> - capacity of image cache in frames</li>
 <li><code>debug_log</code> - sets the debug log level to true or false, default log leve is INFO</li>
-<li><code>video_frame_rate</code> -  sets the debug log level to true or false, default log leve is INFO</li>
+<li><code>video_frame_rate</code> -  Image cache will automatically adjust the fps of video being written. 
+                        This parameter can be used to slow down or speed up fps, 
+                        e.g. 10 will speed up the fps by 10 and -10 will slow down. 
+                        default should be 0, if no change is required</li>
 <li><code>color</code> - color format of frames, can be true or false</li>
 <li><code>grpc_server_host</code> - default 0.0.0.0</li>
 <li><code>grpc_server_port</code> - default 5000</li>
@@ -207,6 +210,24 @@
 <li><code>cost_model</code> - default 'iou'</li>
 </ul>
 <h2 id="violation-service">Violation Service</h2>
+<ul>
+<li><code>redis_host</code> - IP/domain of redis server</li>
+<li><code>redis_port</code> - Port at which redis server is accessible</li>
+<li><code>topic_for_od</code> - Violation service will subscribe to this topic to listen for data sent directly by object detector e.g. TL Status</li>
+<li><code>topic_for_tracker</code> - Violation service will subscribe to this topic to listen for track information sent by object tracker</li>
+<li><code>publish_topic</code> - Violation Service will publish violations information on this topic</li>
+<li><code>log_level</code> - Decides the log level of the service, can be <code>DEBUG</code> or <code>INFO</code></li>
+<li><code>top_factor</code> - Weight given to top of the bounding box while calculating the localization point of a detection. 
+                 y-axis of point is top<em>height + (1-top)</em>height</li>
+<li><code>left_factor</code> - Weight given to left side of the bounding box while calculating the localization point of a detection. 
+                  x-axis of point is left<em>width + (1-left)</em>height</li>
+<li><code>image_height</code> - Height of the annotated image </li>
+<li><code>image_width</code> - Width of the annotated image</li>
+<li><code>alpr_video_duration_ms</code> - Duration of the <code>ALPR</code> video request made by aggregator</li>
+<li><code>fps</code> - Frame per second on which the system is running</li>
+<li><code>profiler_iterations</code> - Iterations of the profiler, after which service will exit and profiler results will be dumped in a text file. 
+                          This value should be <code>-1</code> if profiler results are not required and if service is required to run for the lifecycle of other services</li>
+</ul>
 <h2 id="aggregator">Aggregator</h2>
 <ul>
 <li><code>camera_cache_mapping</code> -</li>
@@ -306,5 +327,5 @@
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2020-12-07 11:37:32.095754+00:00
+Build Date UTC : 2020-12-07 12:50:30.638060+00:00
 -->
