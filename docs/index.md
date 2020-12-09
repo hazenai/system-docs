@@ -135,6 +135,7 @@
 * `log_level` -
 * `generate_dummy_violation` -
 * `map_to_wrongturn` -
+* `map_to_wrongway` -
 * `map_to_runningredlight` -
 * `map_to_trespass_zebra` -
 * `map_to_cellphone` -
