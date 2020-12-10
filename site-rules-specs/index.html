@@ -157,22 +157,22 @@ Each zone involved in aliasing is preceded by a <code>$</code> sign.</p>
 <h2 id="7-rules">7. Rules:</h2>
 <p>The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
 any spaces in it.</p>
-<p>`RunningRedLight:</p>
-<pre><code>RL1:
-    Zone: $Enter
-    Shot: a_shot
+<pre><code class="language-yaml">RunningRedLight:
+    RL1:
+        Zone: $Enter
+        Shot: a_shot
+        States:
+            vehicle_category: '!person'
+            Light: ‘red’
+    RL2:
+        Zone: $
+    RL3:
+        Zone: $Zebra_crossing
+        Shot: b_shot
     States:
-        vehicle_category: '!person'
         Light: ‘red’
-RL2:
-    Zone: $
-RL3:
-    Zone: $Zebra_crossing
-    Shot: b_shot
-States:
-    Light: ‘red’
-RL4:
-    Zone: $Exit`
+    RL4:
+        Zone: $Exit
 </code></pre>
 <p>Here, ‘RunningRedLight’ is the name of the rule. Rulelines are defined later on as <code>RL1</code>, <code>RL2</code>,
 <code>RL3</code> and <code>RL4</code>. This rule defines a violation RunningRedLight in which an object commits a
