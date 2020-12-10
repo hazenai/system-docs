@@ -23,7 +23,7 @@ whether an object has committed a violation or not. For example, in the above sa
 configuration, for an object to commit a “running red light” violation, the value of the factor
 “LIGHT” has to be red.
 Different values of a same factor are written in a string, seperated by pipe characters:
-Light:​ "red|yellow|green|black"
+`Light:​ "red|yellow|green|black"`
 In the above example, Light is a factor and “red”, “yellow”, “green”, and “black” are the possible
 values.
 
@@ -35,9 +35,9 @@ object on an intersection. The figure below shows an annotated frame with zones:
 Zones are defined as multipolygons and the corners of that polygon are mentioned in the
 configuration.
 Following operations can be performed on zones:
-* ‘+’ which corresponds to the union of two regions
-* ‘-’ which subtracts one zone from another zone
-* ‘*’ which gives the intersection of two zones
+* `+` which corresponds to the union of two regions
+* `-` which subtracts one zone from another zone
+* `*` which gives the intersection of two zones
 
 ## 5. ALPR Zones:
 ALPR zones are defined if LPR is required in some scenarios.
@@ -83,24 +83,24 @@ any spaces in it.
         Zone: $Exit`
         
 
-Here, ‘RunningRedLight’ is the name of the rule. Rulelines are defined later on as ‘RL1’, ‘RL2’,
-‘RL3’ and ‘RL4’. This rule defines a violation RunningRedLight in which an object commits a
+Here, ‘RunningRedLight’ is the name of the rule. Rulelines are defined later on as `RL1`, `RL2`,
+`RL3` and `RL4`. This rule defines a violation RunningRedLight in which an object commits a
 violation if it passes from Enter (defined as an alias) to Zebra_Crossing while the light is red and
 then passes through the Exit Zone.
-RL1 defines the zone as $Enter and Shot as a_shot and finally states are mentioned. Zones can
-either be given as an alias ($Enter) or they could be provided as an algebraic expression such as
-$Lane_1 + $Lane_2 + $Lane_3. Both cases are acceptable. If a shot is required to be captured at
-the end of that zone, then Shot is defined in ruleline with its name which is a_shot in the above
-case. States in the ruleline provide the state of the environment at that instance which for ‘Light’ is
-‘red’ and for vehicle category is ‘!person’. States in rulelines support following expressions:
+RL1 defines the zone as `$Enter` and Shot as `a_shot` and finally states are mentioned. Zones can
+either be given as an alias `$Enter` or they could be provided as an algebraic expression such as
+`$Lane_1 + $Lane_2 + $Lane_3`. Both cases are acceptable. If a shot is required to be captured at
+the end of that zone, then Shot is defined in ruleline with its name which is `a_shot` in the above
+case. States in the ruleline provide the state of the environment at that instance which for `Light` is
+`red` and for vehicle category is `!person`. States in rulelines support following expressions:
 
-* ‘!’ if a specific value of a factor has to be excluded. Like in the above example, the rule
+* `!` if a specific value of a factor has to be excluded. Like in the above example, the rule
 applies to every vehicle category except a person.
-* ‘|’ which performs the OR operation. For instance, if it was required that even crossing the
+* `|` which performs the **OR** operation. For instance, if it was required that even crossing the
 region while the light is yellow is a violation, then State Light could be defined as Light:
 ‘red|yellow’.
 
-AND operator is not supported because the value of states are mutually exclusive, and there
+**AND** operator is not supported because the value of states are mutually exclusive, and there
 can’t be two values of a single factor at a given time. Rest of the rulelines are defined in the same
 way as RL1 but RL2 is a unique ruleline, which is written when the regions between RL1 and RL3are disjoint. In that case a ruleline with Zone $ is defined, which corresponds to any region. So, if
 the Enter region and Zebra regions are disjoint, we don’t care where the object goes in between
