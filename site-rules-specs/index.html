@@ -76,6 +76,8 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sample-seatbeltmobilephone-site-config-with-default-sitename">* Sample SeatBelt/MobilePhone site config with DEFAULT sitename.</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -211,17 +213,17 @@ defined before the region used in the last ruleline of a rule.</li>
 <li>Composite zones are supported only as aliases or the zone subsection of rulelines.</li>
 </ol>
 <h3 id="sample-configurations">Sample Configurations</h3>
-<ul>
-<li>Sample SeatBelt/MobilePhone site config with <code>DEFAULT</code> sitename.</li>
-</ul>
-<pre><code class="language-yaml">DEFAULT:
+<h2 id="sample-seatbeltmobilephone-site-config-with-default-sitename">* Sample SeatBelt/MobilePhone site config with <code>DEFAULT</code> sitename.</h2>
+<h1 id="site_configyaml">site_config.yaml</h1>
+<h1 id="i-am-a-commented-line">I am a commented line</h1>
+<p>DEFAULT:
     CONSTANTS:
         IMAGE_WIDTH: 1920
         IMAGE_HEIGHT: 1080
         FPS: 8 
     STATES:
-        seatbelt: &quot;violation|normal|cant_tell&quot;
-        mobile_phone: &quot;normal|on_call|using_mobile|cant_tell&quot;
+        seatbelt: "violation|normal|cant_tell"
+        mobile_phone: "normal|on_call|using_mobile|cant_tell"
     ZONES:
         violation_region: [[0,0],[1920,0],[1920,1080],[0,1080]]
     RULES:
@@ -236,8 +238,8 @@ defined before the region used in the last ruleline of a rule.</li>
                 Zone: $violation_region
                 Shot: c_shot
                 States:
-                    mobile_phone: 'on_call|using_mobile'
-</code></pre>
+                    mobile_phone: 'on_call|using_mobile'</p>
+<hr />
 <ul>
 <li>Sample Trajectory site config of a Site at <code>Riyadh</code></li>
 </ul>
