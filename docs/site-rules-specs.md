@@ -20,11 +20,11 @@ same in most of the sites.
 ## 3. States:
 States are the factors whose values vary and depending on those values, it is determined
 whether an object has committed a violation or not. For example, in the above sample
-configuration, for an object to commit a “running red light” violation, the value of the factor
-“LIGHT” has to be red.
+configuration, for an object to commit a `running red light` violation, the value of the factor
+`LIGHT` has to be red.
 Different values of a same factor are written in a string, seperated by pipe characters:
 `Light:​ "red|yellow|green|black"`
-In the above example, Light is a factor and “red”, “yellow”, “green”, and “black” are the possible
+In the above example, Light is a factor and `red`, `yellow`, `green`, and `black` are the possible
 values.
 
 ## 4. Zones:
@@ -44,42 +44,28 @@ ALPR zones are defined if LPR is required in some scenarios.
 
 ## 6. Alias:
 Alias is a name given to a combination of zones.
-Enter:​ $Lane_1 + $Lane_2 + $Lane_3
-Each zone involved in aliasing is preceded by a $ sign.
+`Enter:​ $Lane_1 + $Lane_2 + $Lane_3`
+Each zone involved in aliasing is preceded by a `$` sign.
 
 ## 7. Rules:
 The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
 any spaces in it.
+
 `RunningRedLight:
-
     RL1:
-
         Zone: $Enter
-
         Shot: a_shot
-
         States:
-
             vehicle_category: '!person'
-
             Light: ‘red’
-
     RL2:
-
         Zone: $
-
     RL3:
-
         Zone: $Zebra_crossing
-
         Shot: b_shot
-
     States:
-
         Light: ‘red’
-
     RL4:
-
         Zone: $Exit`
         
 
@@ -107,7 +93,7 @@ the Enter region and Zebra regions are disjoint, we don’t care where the objec
 them as long as it enters the Zebra region after entering the Enter region at some point. Another
 addition to the ruleline can be of the Duration parameter such as Duration: 1.5 where 1.5 is the
 duration in seconds. A rule employing the parameter Duration has been provided in the above
-sample configuration, named as ‘EnteringRightRegion’.
+sample configuration, named as `EnteringRightRegion`.
 
 ### Caveats:
 
