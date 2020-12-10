@@ -138,9 +138,8 @@ refer to values such as frame rate, image height, image width etc. etc. that rem
 same in most of the sites.</p>
 <h2 id="3-states">3. States</h2>
 <p>States are the factors whose values vary and depending on those values, it is determined
-whether an object has committed a violation or not. For example, in the above sample
-configuration, for an object to commit a <code>running red light</code> violation, the value of the factor
-<code>LIGHT</code> has to be red.
+whether an object has committed a violation or not. For example, for an object to commit a 
+<code>running red light</code> violation, the value of the factor <code>LIGHT</code> has to be red.
 Different values of a same factor are written in a string, seperated by pipe characters:
 <code>Light:​ "red|yellow|green|black"</code>
 In the above example, Light is a factor and <code>red</code>, <code>yellow</code>, <code>green</code>, and <code>black</code> are the possible
@@ -151,10 +150,12 @@ object on an intersection. The figure below shows an annotated frame with zones:
 <p><img alt="alt text" src="../Isolated.jpg" title="Title" /></p>
 <p>Zones are defined as multipolygons and the corners of that polygon are mentioned in the
 configuration.
-Following operations can be performed on zones:
-* <code>+</code> which corresponds to the union of two regions
-* <code>-</code> which subtracts one zone from another zone
-* <code>*</code> which gives the intersection of two zones</p>
+Following operations can be performed on zones:</p>
+<ul>
+<li><code>+</code> - corresponds to the union of two regions</li>
+<li><code>-</code> - subtracts one zone from another zone</li>
+<li><code>*</code> -  gives the intersection of two zones</li>
+</ul>
 <h2 id="5-alpr-zones">5. ALPR Zones:</h2>
 <p>ALPR zones are defined if LPR is required in some scenarios.</p>
 <h2 id="6-alias">6. Alias:</h2>
@@ -164,20 +165,21 @@ Each zone involved in aliasing is preceded by a <code>$</code> sign.</p>
 <h2 id="7-rules">7. Rules:</h2>
 <p>The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
 any spaces in it.</p>
+<p><strong>Sample Rule with 4 rulelines:</strong></p>
 <pre><code class="language-yaml">RunningRedLight:
     RL1:
         Zone: $Enter
         Shot: a_shot
         States:
             vehicle_category: '!person'
-            Light: ‘red’
+            Light: 'red'
     RL2:
         Zone: $
     RL3:
         Zone: $Zebra_crossing
         Shot: b_shot
-    States:
-        Light: ‘red’
+        States:
+            Light: 'red'
     RL4:
         Zone: $Exit
 </code></pre>
@@ -217,7 +219,7 @@ defined before the region used in the last ruleline of a rule.</li>
 </ol>
 <h2 id="sample-configurations">Sample Configurations</h2>
 <ul>
-<li>Sample SeatBelt/MobilePhone site config with <code>DEFAULT</code> sitename.</li>
+<li><strong>Sample SeatBelt/MobilePhone site config with <code>DEFAULT</code> sitename.</strong></li>
 </ul>
 <pre><code class="language-yaml"># site_config.yaml
 # I am a commented line
@@ -246,7 +248,7 @@ DEFAULT:
                     mobile_phone: 'on_call|using_mobile'
 </code></pre>
 <ul>
-<li>Sample Trajectory site config of a Site at <code>Riyadh</code></li>
+<li><strong>Sample Trajectory site config of a Site at <code>Riyadh</code></strong></li>
 </ul>
 <pre><code class="language-yaml">RIYADH:         # Site Name
     CONSTANTS:
@@ -391,7 +393,7 @@ DEFAULT:
                 Shot: b_shot
 </code></pre>
 <ul>
-<li>Sample SB/MP site config for <code>AI_ACTIVE</code></li>
+<li><strong>Sample SB/MP site config for <code>AI_ACTIVE</code></strong></li>
 </ul>
 <pre><code class="language-yaml">AI_ACTIVE:
     CONSTANTS:
