@@ -1,0 +1,462 @@
+KARACHI:                    # Site Name
+    CONSTANTS:
+        IMAGE_WIDTH: 1920
+        IMAGE_HEIGHT: 1080
+        FPS: 7          
+    STATES:             # define possible value of states here
+        Light0: "red|yellow|green|black"      # Four Light factors corresponding to 4 traffic lights on intersection 
+        Light1: "red|yellow|green|black"
+        Light2: "red|yellow|green|black"
+        Light3: "red|yellow|green|black"
+    ZONES:
+        zebra: [[1563,323],[1598,427],[1706,427],[1670,324]]
+        right_bottom: [[1665,324],[1701,427],[1920,425],[1920,315]]
+        right_top: [[1536,260],[1539,282],[1620,282],[1620,260]]
+        bottom_right: [[641,443],[0,727],[0,1080],[1920,1080],[1918,421]]
+        bottom_left: [[64,492],[0,532],[0,650],[543,448]]
+        left_bottom: [[0,462],[0,485],[50,488],[279,420]]
+        left_top: [[388,344],[575,343],[394,381]]
+        top_right: [[1250,205],[1060,282],[1491,267],[1473,197]]
+        top_left: [[990,259],[820,301],[1017,284]]
+        intersection: [[703,308],[44,492],[1601,424],[1541,260]]
+    ALIAS:
+        Enter: $bottom_left + $top_left + $zebra
+        Exit: $top_left + $intersection
+    RULES:
+        # Event when an object runs a red light
+        # This event has 2 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection while the light is red since there is no zebra crossing
+        # 2- Object goes into the intersection region
+            # For this in RL2 a shot is captured for evidence as soon as the first second has passed 
+            # while in intersection
+        runningredlight1: 
+            RL1:
+                Zone: $bottom_left
+                Shot: a_shot
+                States: 
+                    Light1: red
+            RL2:
+                Zone: $intersection
+                Duration: 1
+                Shot: c_shot
+                States:
+                    Light1: red
+        # This is the same rule as "runningredlight1" but with different regions.
+        runningredlight2:
+            RL1:
+                Zone: $right_bottom
+                Shot: a_shot
+                States:
+                    Light2: red
+            RL2:
+                Zone: $intersection
+                Duration: 1
+                Shot: c_shot
+                States:
+                    Light2: red
+        # This is the same rule as "runningredlight1" but with different regions.        
+        runningredlight3:
+            RL1:
+                Zone: $top_right
+                Shot: a_shot
+                States:
+                    Light3: red
+            RL2:
+                Zone: $intersection
+                Duration: 1
+                Shot: c_shot
+                States:
+                    Light3: red
+        # This is the same rule as "runningredlight1" but with different regions.        
+        runningredlight0:
+            RL1:
+                Zone: $left_top
+                Shot: a_shot
+                States:
+                    Light3: red
+            RL2:
+                Zone: $intersection
+                Duration: 20
+                Shot: c_shot
+                States:
+                    Light3: red
+        # Event when an object goes the wrong way
+        # This event has 2 shots. The object path follows the following pattern:
+            # 1- Object goes from the combined region ($bottom_right + $left_bottom + $top_left + $right_top) 
+            # 2- to the intersection, after the first 3 secs in this region a shot (b_shot) is generated
+        wrongway:
+            RL1:
+                Zone: $bottom_right + $left_bottom + $top_left + $right_top
+                Shot: c_shot
+            RL2:
+                Zone: $intersection
+                Duration: 3
+                Shot: b_shot
+        # Event when an object takes an illegal u-turn
+        # This event has 3 shots. The object path follows the following pattern:
+            # 1- Object goes from the bottom left region to
+            # 2- the intersection and then to
+            # 3- the bottom right region
+        illegaluturn1:
+            RL1:
+                Zone: $bottom_left
+                Shot: a_shot
+            RL2:
+                Zone: $intersection
+                Shot: c_shot
+            RL3:
+                Zone: $bottom_right
+                Shot: b_shot
+        # This rule is similar to 'illegaluturn1' but with different regions
+        illegaluturn3:
+            RL1:
+                Zone: $top_right
+                Shot: a_shot
+            RL2:
+                Zone: $intersection
+                Shot: c_shot
+            RL3:
+                Zone: $top_left
+                Shot: b_shot
+        # This rule is similar to 'illegaluturn1' but with different regions
+        illegaluturn0:
+            RL1:
+                Zone: $right_bottom + $zebra
+                Shot: a_shot
+            RL2:
+                Zone: $intersection
+                Shot: c_shot
+            RL3:
+                Zone: $right_top
+                Shot: b_shot
+        # This rule is similar to 'illegaluturn1' but with different regions
+        illegaluturn4:
+            RL1:
+                Zone: $left_top
+                Shot: a_shot
+            RL2:
+                Zone: $intersection
+                Shot: c_shot
+            RL3:
+                Zone: $left_bottom
+                Shot: b_shot
+        # Event when an object stops for an extended period in a region where stopping is not allowed
+        # This event has 3 shots. The object path follows the following pattern:
+            # 1- Object stays in bottom right for at least 10 seconds
+        stoppedvehicle:
+            RL1:
+                Zone: $bottom_right
+                Duration: 10
+                Shot: c_shot
+        # Event when an object trespasses pedestrian crossing while the light was red
+        # This event has 2 shots. The object path follows the following pattern:
+            # 1- Object is in bottom_right region, the light was red to
+            # 2- Zebra when the light was red and stays there for 3 seconds
+        trespass_zebra:
+            RL1:
+                Zone: $right_bottom
+                Shot: a_shot
+                States:
+                    Light2: red
+            RL2:
+                Zone: $zebra
+                Duration: 3
+                Shot: c_shot
+                States:
+                    Light2: red
+
+
+LED_SYNERGY:      # Site Name
+    CONSTANTS:
+        IMAGE_WIDTH: 1920
+        IMAGE_HEIGHT: 1080
+        FPS: 8
+    STATES:          # No traffic light signals but operations are required on vehicle category
+        vehicle_category: "person|bicycle|car|motorcycle|bus|train|truck|caravan|rider"  
+    ZONES:
+        left: [[0,638],[0,861],[630,828],[352,580]]
+        left_zebra: [[352,580],[630,828],[863,848],[445,555]]
+        right: [[947,463],[1491,561],[1920,450],[1920,315]]
+        lt_lane: [[327,447],[1209,1080],[1920,1080],[1917,863],[515,429]]
+        rt_lane: [[515,429],[1917,863],[1920,633],[730,407]]
+        lt_lane_bottom: [[1004,864],[1154,993],[1573,850],[1369,752]]
+        rt_lane_bottom: [[1465,715],[1785,790],[1890,656],[1736,624]]
+        alpr_1: [[394,497],[448,540],[673,502],[578,461]]
+        alpr_2: [[590,458],[693,497],[886,461],[804,435]]
+    ALPR_ZONES:            # ALPR zones are used here
+        ALPR_1: $alpr_1
+        ALPR_2: $alpr_2
+    RULES:
+        # Event when an object enters Left lane
+        # This event has 2 shots. The object path follows the following pattern:
+            # 1- Object goes from lt_lane + rt_lane to
+            # 2- left_zebra to
+            # 3- left region
+            # Since the regions left_zebra and left are disjoint an empty RuleLine RL2 is added,
+            # which corresponds to any region
+            # In addition to that, since, it is desired that persons be filtered out from events,
+            # '!person' is used in vehicle_category in States header
+        EnteringLeftLane:
+            RL1:
+                Zone: $lt_lane + $rt_lane
+                Shot: a_shot
+                States:
+                    vehicle_category: '!person'
+            RL2:
+                Zone: $
+            RL3:
+                Zone: $left_zebra
+                Shot: c_shot
+            RL4:
+                Zone: $
+            RL5:
+                Zone: $left
+        # Event when an object enters Parking Lot
+        # This event has 3 shots. The object path follows the following pattern:
+            # 1- Object goes is in lt_lane + rt_lane for 1.5 seconds and
+            # 2- stays there for another 1.5 seconds to
+            # 3- right region
+            # In addition to that, since, it is desired that persons be filtered out from events,
+            # '!person' is used in vehicle_category in States header
+        EnteringParkingLot:
+            RL1:
+                Zone: $lt_lane + $rt_lane
+                States:
+                    vehicle_category: '!person'
+            RL2:
+                Zone: $lt_lane + $rt_lane
+                Duration: 1.5
+                Shot: a_shot
+            RL3:
+                Zone: $lt_lane + $rt_lane
+                Duration: 1.5
+                Shot: b_shot
+            RL4:
+                Zone: $right
+                Shot: c_shot
+        # Event when an object exits Parking Lot
+        # This event has 3 shots. The object path follows the following pattern:
+            # 1- goes form right region to
+            # 2- lt_lane + rt_lane for 2 seconds and
+            # 3- stays there for another 2 seconds
+            # In addition to that, since, it is desired that persons be filtered out from events,
+            # '!person' is used in vehicle_category in States header
+        ExitingParkingLot:
+            RL1:
+                Zone: $right
+                Shot: a_shot
+                States:
+                    vehicle_category: '!person'
+            RL2:
+                Zone: $lt_lane + $rt_lane
+                Duration: 2
+                Shot: b_shot
+            RL3:
+                Zone: $lt_lane + $rt_lane
+                Duration: 2
+                Shot: c_shot
+        # Event when an object passes through Lane_2
+        # No shots are required for this event
+        PassingThroughLane_2:
+            RL1:
+                Zone: $alpr_1
+                States:
+                    vehicle_category: '!person'
+            RL2:
+                Zone: $
+            RL3:
+                Zone: $lt_lane_bottom
+        # Event when an object passes through Lane_1
+        # No shots are required for this event
+        PassingThroughLane_1:
+            RL1:
+                Zone: $alpr_2
+                States:
+                    vehicle_category: '!person'
+            RL2:
+                Zone: $
+            RL3:
+                Zone: $rt_lane_bottom
+
+
+AI_ACTIVE:         # Site name
+    CONSTANTS:
+        IMAGE_WIDTH: 1920
+        IMAGE_HEIGHT: 1080
+        FPS: 8 
+    STATES:              # States consist of seatbelt and mobile phone usage
+        Seatbelt: "violation|normal|cant_tell"
+        mobile_phone: "normal|on_call|using_mobile|cant_tell"
+    ZONES:
+        violation_region: [[1,161],[1530,92],[1917,374],[1916,804],[0,943], [1,161]]
+    RULES:
+        # Event when a driver is not wearing seatbelt
+        # This event has just 1 shot. A violation region is defined and when an object
+        # passes throught that region not wearing seatbelt, this event is triggered
+        Not_Wearing_Seatbelt:
+            RL1:
+                Zone: $violation_region
+                Shot: c_shot
+                States:
+                    Seatbelt: 'violation'
+        # Event when a driver is using mobile phone
+        # This event has just 1 shot. A violation region is defined and when an object
+        # passes throught that region using mobile phone, this event is triggered
+        Using_Mobilephone:
+            RL1:
+                Zone: $violation_region
+                Shot: c_shot
+                States:
+                    mobile_phone: 'using_mobile'
+        # Event when a driver is on call
+        # This event has just 1 shot. A violation region is defined and when an object
+        # passes throught that region using mobile phone, this event is triggered
+        On_Call:
+            RL1:
+                Zone: $violation_region
+                Shot: c_shot
+                States:
+                    mobile_phone: 'on_call'
+
+
+RIYADH:         # Site Name
+    CONSTANTS:
+        IMAGE_WIDTH: 1920
+        IMAGE_HEIGHT: 1080
+        FPS: 7
+    STATES:       # States
+        Light: "red|yellow|green|black"
+        Time: "Morning|Day|Evening|Night"
+        Day: "Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday"
+    ZONES:
+        Intersection: [[857, 458], [675, 368], [159, 404], [176, 510]]
+        Left: [[4, 405], [159, 404], [176, 510], [4, 526]]
+        Right: [[757, 407], [873, 466], [1071, 437], [971, 390]]
+        Straight: [[263, 336], [516, 314], [582, 404], [244, 432]]
+        RT_Lane: [[1328, 515], [1503, 498], [1901, 597], [1727, 658]]
+        LT_Lane: [[216, 508], [393, 496], [1097, 1078], [464, 1078]]
+        Lane_3: [[393, 496], [533, 484], [1860, 1078], [1097, 1078]]
+        Lane_2: [[533, 484], [677, 473], [1917, 906], [1860, 1078]]
+        Lane_1: [[677, 473], [820, 461], [1918, 755], [1917, 906]]
+        Zebra: [[216, 508], [820, 461], [947, 507], [242, 568]]
+    ALIAS:
+        Enter: $Lane_1 + $Lane_2 + $Lane_3 + $LT_Lane + $RT_Lane
+        Exit: $Left + $Right + $Straight
+    RULES:
+        # Event when an object runs a red light
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection while the light is red and then goes to
+        # 2- Zebra region and then to
+        # 3- Intersection and stays there for 1 second (with early capture) and then
+            # Also, Since regions are disjoint empty ruleLines RL3 and RL6 are used
+        Failure_to_Stop_at_RL:
+            RL1: 
+                Zone: $Enter - $Zebra
+                Shot: a_shot
+                States:
+                    Light: 'red'
+            RL2:
+                Zone: $Zebra
+                Shot: b_shot
+                States:
+                    Light: 'red'
+            RL3:
+                Zone: $
+            RL4:
+                Zone: $Intersection
+                Duration: 1
+                Shot: c_shot
+                States:
+                    Light: 'red'
+            RL5:
+                Zone: $Intersection
+            RL6:
+                Zone: $ 
+            RL7:
+                Zone: $Exit
+        # Event when an object takes a left turn from straight only lane
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection then goes to
+        # 2- then to intersection of zebra with (Enter - Left) to 
+        # 3- Intersection to
+        # 4- Left region
+        Left_Turn_from_Wrong_Lane:
+            RL1:
+                Zone: ($Enter - $LT_Lane) - $Zebra
+                Shot: a_shot
+            RL2:
+                Zone: ($Enter - $LT_Lane) * $Zebra
+                Shot: b_shot
+            RL3:
+                Zone: $
+            RL4:
+                Zone: $Intersection
+                Shot: c_shot
+            RL5:
+                Zone: $Left
+        # Event when an object goes straight from a turn only lane
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection then goes to
+        # 2- then to intersection of zebra with Left Lane to 
+        # 3- Intersection to
+        # 4- Straight region
+        Straight_from_Turn_Only_Lane:
+            RL1:
+                Zone: $LT_Lane - ($LT_Lane * $Zebra)
+                Shot: a_shot
+            RL2:
+                Zone: $LT_Lane * $Zebra
+                Shot: b_shot
+            RL3:
+                Zone: $
+            RL4:
+                Zone: $Intersection
+            RL5:
+                Zone: $Straight
+                Shot: c_shot
+        # Event when an object goes right from the wrong lane
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection then goes to
+        # 2- then to intersection of zebra with intersection of Enter and Left Lane to 
+        # 3- Intersection to
+        # 4- Right region
+        Right_Turn_from_Wrong_Lane:
+            RL1:
+                Zone: ($Enter - $RT_Lane) - $Zebra
+                Shot: a_shot
+            RL2:
+                Zone: ($Enter * $RT_Lane) * $Zebra
+                Shot: b_shot
+            RL3:
+                Zone: $
+            RL4:
+                Zone: $Intersection
+            RL5:
+                Zone: $Right
+                Shot: c_shot
+        # Event when an object blocks the pedestrain crossing
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection then goes to
+        # 2- zebra and stays there for 3 seconds
+        Block_Pedestrian_Crossing:
+            RL1:
+                Zone: $Enter - $RT_Lane - $Zebra
+                Shot: a_shot
+            RL2:
+                Zone: $Zebra
+                Duration: 3
+                Shot: c_shot
+                States:
+                    Light: 'red'
+        # Event when an object goes into a restricted lane
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is in a non-restricted zone
+        # 2- Object goes to restricted zone and stays there for 1 second
+        Driving_in_Restricted_Lane:
+            RL1:
+                Zone: $Enter - $LT_Lane
+                Shot: a_shot
+            RL2:
+                Zone: $LT_Lane
+                Duration: 1
+                Shot: b_shot

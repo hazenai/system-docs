@@ -58,6 +58,22 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Site Rules Specification</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-site-name">1. SITE NAME:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-states">3. States:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-zones">4. Zones:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-alpr-zones">5. ALPR Zones:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-alias">6. Alias:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-rules">7. Rules:</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats:</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -98,6 +114,100 @@
             <div class="section">
               
                 <h1 id="site-rules-specification">Site Rules Specification</h1>
+<p>A configuration consists of 6 or 7 parameters depending on the requirements which are:
+1. Site Name (color coded red in above sample configuration)
+2. Constants
+3. States
+4. Zones
+5. ALPR Zones
+6. Alias
+7. Rules</p>
+<p>Sample site configuration rules can be found <a href="../site_config.yaml">here</a></p>
+<h2 id="1-site-name">1. SITE NAME:</h2>
+<p>Site name corresponds to the site where the service is deployed and is the first thing mentioned
+in the configuration.2. Constants:
+Constants are the values which are required to be known by violation service beforehand and
+refer to values such as frame rate, image height, image width etc. etc. that remain almost the
+same in most of the sites.</p>
+<h2 id="3-states">3. States:</h2>
+<p>States are the factors whose values vary and depending on those values, it is determined
+whether an object has committed a violation or not. For example, in the above sample
+configuration, for an object to commit a <code>running red light</code> violation, the value of the factor
+<code>LIGHT</code> has to be red.
+Different values of a same factor are written in a string, seperated by pipe characters:
+<code>Light:​ "red|yellow|green|black"</code>
+In the above example, Light is a factor and <code>red</code>, <code>yellow</code>, <code>green</code>, and <code>black</code> are the possible
+values.</p>
+<h2 id="4-zones">4. Zones:</h2>
+<p>Zones are the annotated regions on an image which are used to determine the passage of an
+object on an intersection. The figure below shows an annotated frame with zones:
+<img alt="alt text" src="../Isolated.jpg" title="Title" /></p>
+<p>Zones are defined as multipolygons and the corners of that polygon are mentioned in the
+configuration.
+Following operations can be performed on zones:
+* <code>+</code> which corresponds to the union of two regions
+* <code>-</code> which subtracts one zone from another zone
+* <code>*</code> which gives the intersection of two zones</p>
+<h2 id="5-alpr-zones">5. ALPR Zones:</h2>
+<p>ALPR zones are defined if LPR is required in some scenarios.</p>
+<h2 id="6-alias">6. Alias:</h2>
+<p>Alias is a name given to a combination of zones.
+<code>Enter:​ $Lane_1 + $Lane_2 + $Lane_3</code>
+Each zone involved in aliasing is preceded by a <code>$</code> sign.</p>
+<h2 id="7-rules">7. Rules:</h2>
+<p>The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
+any spaces in it.</p>
+<p>`RunningRedLight:</p>
+<pre><code>RL1:
+    Zone: $Enter
+    Shot: a_shot
+    States:
+        vehicle_category: '!person'
+        Light: ‘red’
+RL2:
+    Zone: $
+RL3:
+    Zone: $Zebra_crossing
+    Shot: b_shot
+States:
+    Light: ‘red’
+RL4:
+    Zone: $Exit`
+</code></pre>
+<p>Here, ‘RunningRedLight’ is the name of the rule. Rulelines are defined later on as <code>RL1</code>, <code>RL2</code>,
+<code>RL3</code> and <code>RL4</code>. This rule defines a violation RunningRedLight in which an object commits a
+violation if it passes from Enter (defined as an alias) to Zebra_Crossing while the light is red and
+then passes through the Exit Zone.
+RL1 defines the zone as <code>$Enter</code> and Shot as <code>a_shot</code> and finally states are mentioned. Zones can
+either be given as an alias <code>$Enter</code> or they could be provided as an algebraic expression such as
+<code>$Lane_1 + $Lane_2 + $Lane_3</code>. Both cases are acceptable. If a shot is required to be captured at
+the end of that zone, then Shot is defined in ruleline with its name which is <code>a_shot</code> in the above
+case. States in the ruleline provide the state of the environment at that instance which for <code>Light</code> is
+<code>red</code> and for vehicle category is <code>!person</code>. States in rulelines support following expressions:</p>
+<ul>
+<li><code>!</code> if a specific value of a factor has to be excluded. Like in the above example, the rule
+applies to every vehicle category except a person.</li>
+<li><code>|</code> which performs the <strong>OR</strong> operation. For instance, if it was required that even crossing the
+region while the light is yellow is a violation, then State Light could be defined as Light:
+‘red|yellow’.</li>
+</ul>
+<p><strong>AND</strong> operator is not supported because the value of states are mutually exclusive, and there
+can’t be two values of a single factor at a given time. Rest of the rulelines are defined in the same
+way as RL1 but RL2 is a unique ruleline, which is written when the regions between RL1 and RL3are disjoint. In that case a ruleline with Zone $ is defined, which corresponds to any region. So, if
+the Enter region and Zebra regions are disjoint, we don’t care where the object goes in between
+them as long as it enters the Zebra region after entering the Enter region at some point. Another
+addition to the ruleline can be of the Duration parameter such as Duration: 1.5 where 1.5 is the
+duration in seconds. A rule employing the parameter Duration has been provided in the above
+sample configuration, named as <code>EnteringRightRegion</code>.</p>
+<h3 id="caveats">Caveats:</h3>
+<ol>
+<li>ALPR zones are not used in rulelines. They are just defined in the beginning of the
+configuration and then violation service determines the LPR zone of the object
+committing the violation.</li>
+<li>Speaking of ALPR zones, LPR information would only be available if the ALPR zones are
+defined before the region used in the last ruleline of a rule.</li>
+<li>Composite zones are supported only as aliases or the zone subsection of rulelines.</li>
+</ol>
               
             </div>
           </div>
