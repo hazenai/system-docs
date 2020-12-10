@@ -8,6 +8,8 @@ A configuration consists of 6 or 7 parameters depending on the requirements whic
 6. Alias
 7. Rules
 
+Sample rules [here](./site_config.yaml)
+
 ## 1. SITE NAME:
 Site name corresponds to the site where the service is deployed and is the first thing mentioned
 in the configuration.2. Constants:
