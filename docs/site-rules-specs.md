@@ -35,9 +35,9 @@ object on an intersection. The figure below shows an annotated frame with zones:
 Zones are defined as multipolygons and the corners of that polygon are mentioned in the
 configuration.
 Following operations can be performed on zones:
-● ‘+’ which corresponds to the union of two regions
-● ‘-’ which subtracts one zone from another zone
-● ‘*’ which gives the intersection of two zones
+* ‘+’ which corresponds to the union of two regions
+* ‘-’ which subtracts one zone from another zone
+* ‘*’ which gives the intersection of two zones
 
 ## 5. ALPR Zones:
 ALPR zones are defined if LPR is required in some scenarios.
@@ -50,22 +50,22 @@ Each zone involved in aliasing is preceded by a $ sign.
 ## 7. Rules:
 The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
 any spaces in it.
-`RunningRedLight:<br />
-    RL1:<br />
-        Zone: $Enter<br />
-        Shot: a_shot<br />
-        States:<br />
-            vehicle_category: '!person'<br />
-            Light: ‘red’<br />
-    RL2:<br />
-        Zone: $<br />
-    RL3:<br />
-        Zone: $Zebra_crossing<br />
-        Shot: b_shot<br />
-    States:<br />
-        Light: ‘red’<br />
-    RL4:<br />
-        Zone: $Exit`<br />
+`RunningRedLight:
+    RL1:
+        Zone: $Enter
+        Shot: a_shot
+        States:
+            vehicle_category: '!person'
+            Light: ‘red’
+    RL2:
+        Zone: $
+    RL3:
+        Zone: $Zebra_crossing
+        Shot: b_shot
+    States:
+        Light: ‘red’
+    RL4:
+        Zone: $Exit`
 
 Here, ‘RunningRedLight’ is the name of the rule. Rulelines are defined later on as ‘RL1’, ‘RL2’,
 ‘RL3’ and ‘RL4’. This rule defines a violation RunningRedLight in which an object commits a
@@ -78,12 +78,12 @@ the end of that zone, then Shot is defined in ruleline with its name which is a_
 case. States in the ruleline provide the state of the environment at that instance which for ‘Light’ is
 ‘red’ and for vehicle category is ‘!person’. States in rulelines support following expressions:
 
-● ‘!’ if a specific value of a factor has to be excluded. Like in the above example, the rule
+* ‘!’ if a specific value of a factor has to be excluded. Like in the above example, the rule
 applies to every vehicle category except a person.
-● ‘|’ which performs the OR operation. For instance, if it was required that even crossing the
+* ‘|’ which performs the OR operation. For instance, if it was required that even crossing the
 region while the light is yellow is a violation, then State Light could be defined as Light:
 ‘red|yellow’.
-AND operator is not supported because the value of states are mutually exclusive, and there
+* AND operator is not supported because the value of states are mutually exclusive, and there
 can’t be two values of a single factor at a given time. Rest of the rulelines are defined in the same
 way as RL1 but RL2 is a unique ruleline, which is written when the regions between RL1 and RL3are disjoint. In that case a ruleline with Zone $ is defined, which corresponds to any region. So, if
 the Enter region and Zebra regions are disjoint, we don’t care where the object goes in between
@@ -92,7 +92,7 @@ addition to the ruleline can be of the Duration parameter such as Duration: 1.5 
 duration in seconds. A rule employing the parameter Duration has been provided in the above
 sample configuration, named as ‘EnteringRightRegion’.
 
-Caveats:
+### Caveats:
 
 1. ALPR zones are not used in rulelines. They are just defined in the beginning of the
 configuration and then violation service determines the LPR zone of the object
