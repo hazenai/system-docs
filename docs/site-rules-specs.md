@@ -51,8 +51,8 @@ Each zone involved in aliasing is preceded by a `$` sign.
 The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
 any spaces in it.
 
-`RunningRedLight:
-
+```yaml
+RunningRedLight:
     RL1:
         Zone: $Enter
         Shot: a_shot
@@ -67,8 +67,8 @@ any spaces in it.
     States:
         Light: ‘red’
     RL4:
-        Zone: $Exit`
-        
+        Zone: $Exit
+```        
 
 Here, ‘RunningRedLight’ is the name of the rule. Rulelines are defined later on as `RL1`, `RL2`,
 `RL3` and `RL4`. This rule defines a violation RunningRedLight in which an object commits a
