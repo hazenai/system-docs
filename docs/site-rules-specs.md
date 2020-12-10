@@ -12,7 +12,7 @@ A site configuration consists of 6 or 7 parameters depending on the requirements
 
 Sample site configuration rules can be found [here](#sample-configurations)
 
-## 1. SITE NAME
+## 1. Site Name
 Site name corresponds to the site where the service is deployed and is the first thing mentioned
 in the configuration.
 
