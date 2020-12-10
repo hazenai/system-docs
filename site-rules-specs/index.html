@@ -116,15 +116,17 @@
             <div class="section">
               
                 <h1 id="site-rules-specification">Site Rules Specification</h1>
-<p>A configuration consists of 6 or 7 parameters depending on the requirements which are:
-1. Site Name (color coded red in above sample configuration)
-2. Constants
-3. States
-4. Zones
-5. ALPR Zones
-6. Alias
-7. Rules</p>
-<p>Sample site configuration rules can be found <a href="../site_config.yaml">here</a></p>
+<p>A configuration consists of 6 or 7 parameters depending on the requirements which are:</p>
+<ol>
+<li>Site Name</li>
+<li>Constants</li>
+<li>States</li>
+<li>Zones</li>
+<li>ALPR Zones</li>
+<li>Alias</li>
+<li>Rules</li>
+</ol>
+<p>Sample site configuration rules can be found <a href="#sample-configurations">here</a></p>
 <h2 id="1-site-name">1. SITE NAME</h2>
 <p>Site name corresponds to the site where the service is deployed and is the first thing mentioned
 in the configuration.2. Constants:
@@ -142,8 +144,8 @@ In the above example, Light is a factor and <code>red</code>, <code>yellow</code
 values.</p>
 <h2 id="4-zones">4. Zones</h2>
 <p>Zones are the annotated regions on an image which are used to determine the passage of an
-object on an intersection. The figure below shows an annotated frame with zones:
-<img alt="alt text" src="../Isolated.jpg" title="Title" /></p>
+object on an intersection. The figure below shows an annotated frame with zones:</p>
+<p><img alt="alt text" src="../Isolated.jpg" title="Title" /></p>
 <p>Zones are defined as multipolygons and the corners of that polygon are mentioned in the
 configuration.
 Following operations can be performed on zones:
