@@ -8,7 +8,7 @@ A configuration consists of 6 or 7 parameters depending on the requirements whic
 6. Alias
 7. Rules
 
-Sample rules [here](./site_config.yaml)
+Sample site configuration rules can be found [here](./site_config.yaml)
 
 ## 1. SITE NAME:
 Site name corresponds to the site where the service is deployed and is the first thing mentioned
@@ -52,6 +52,7 @@ The first thing in a rule is its name followed by a sequence of rulelines. Rule 
 any spaces in it.
 
 `RunningRedLight:
+
     RL1:
         Zone: $Enter
         Shot: a_shot
