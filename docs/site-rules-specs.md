@@ -1,6 +1,8 @@
 # Site Rules Specification
-A configuration consists of 6 or 7 parameters depending on the requirements which are:
-1. Site Name (color coded red in above sample configuration)
+
+A site configuration consists of 6 or 7 parameters depending on the requirements which are:
+
+1. Site Name
 2. Constants
 3. States
 4. Zones
@@ -8,20 +10,21 @@ A configuration consists of 6 or 7 parameters depending on the requirements whic
 6. Alias
 7. Rules
 
-Sample site configuration rules can be found [here](./site_config.yaml)
+Sample site configuration rules can be found [here](#sample-configurations)
 
 ## 1. SITE NAME
 Site name corresponds to the site where the service is deployed and is the first thing mentioned
-in the configuration.2. Constants:
+in the configuration.
+
+## 2. Constants:
 Constants are the values which are required to be known by violation service beforehand and
 refer to values such as frame rate, image height, image width etc. etc. that remain almost the
 same in most of the sites.
 
 ## 3. States
 States are the factors whose values vary and depending on those values, it is determined
-whether an object has committed a violation or not. For example, in the above sample
-configuration, for an object to commit a `running red light` violation, the value of the factor
-`LIGHT` has to be red.
+whether an object has committed a violation or not. For example, for an object to commit a 
+`running red light` violation, the value of the factor `LIGHT` has to be red.
 Different values of a same factor are written in a string, seperated by pipe characters:
 `Light:​ "red|yellow|green|black"`
 In the above example, Light is a factor and `red`, `yellow`, `green`, and `black` are the possible
@@ -30,14 +33,16 @@ values.
 ## 4. Zones
 Zones are the annotated regions on an image which are used to determine the passage of an
 object on an intersection. The figure below shows an annotated frame with zones:
+
 ![alt text](Isolated.jpg "Title")
 
 Zones are defined as multipolygons and the corners of that polygon are mentioned in the
 configuration.
 Following operations can be performed on zones:
-* `+` which corresponds to the union of two regions
-* `-` which subtracts one zone from another zone
-* `*` which gives the intersection of two zones
+
+* `+` - corresponds to the union of two regions
+* `-` - subtracts one zone from another zone
+* `*` -  gives the intersection of two zones
 
 ## 5. ALPR Zones:
 ALPR zones are defined if LPR is required in some scenarios.
@@ -51,6 +56,7 @@ Each zone involved in aliasing is preceded by a `$` sign.
 The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
 any spaces in it.
 
+**Sample Rule with 4 rulelines:**
 ```yaml
 RunningRedLight:
     RL1:
@@ -58,14 +64,14 @@ RunningRedLight:
         Shot: a_shot
         States:
             vehicle_category: '!person'
-            Light: ‘red’
+            Light: 'red'
     RL2:
         Zone: $
     RL3:
         Zone: $Zebra_crossing
         Shot: b_shot
-    States:
-        Light: ‘red’
+    	States:
+            Light: 'red'
     RL4:
         Zone: $Exit
 ```        
@@ -107,7 +113,7 @@ defined before the region used in the last ruleline of a rule.
 
 ## Sample Configurations
 
-* Sample SeatBelt/MobilePhone site config with `DEFAULT` sitename.
+* **Sample SeatBelt/MobilePhone site config with `DEFAULT` sitename.**
 ```yaml
 # site_config.yaml
 # I am a commented line
@@ -136,7 +142,7 @@ DEFAULT:
                     mobile_phone: 'on_call|using_mobile'
 ```
 
-* Sample Trajectory site config of a Site at `Riyadh`
+* **Sample Trajectory site config of a Site at `Riyadh`**
 ```yaml
 RIYADH:         # Site Name
     CONSTANTS:
@@ -281,7 +287,7 @@ RIYADH:         # Site Name
                 Shot: b_shot
 ```
 
-* Sample SB/MP site config for `AI_ACTIVE`
+* **Sample SB/MP site config for `AI_ACTIVE`**
 ```yaml
 AI_ACTIVE:
     CONSTANTS:
