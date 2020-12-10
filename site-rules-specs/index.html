@@ -58,11 +58,11 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Site Rules Specification</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#1-site-name">1. SITE NAME:</a>
+    <li class="toctree-l2"><a class="reference internal" href="#1-site-name">1. SITE NAME</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-states">3. States:</a>
+    <li class="toctree-l2"><a class="reference internal" href="#3-states">3. States</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#4-zones">4. Zones:</a>
+    <li class="toctree-l2"><a class="reference internal" href="#4-zones">4. Zones</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#5-alpr-zones">5. ALPR Zones:</a>
     </li>
@@ -70,7 +70,9 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#7-rules">7. Rules:</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats:</a>
+    <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sample-configurations">Sample Configurations</a>
     </li>
         </ul>
     </li>
@@ -123,13 +125,13 @@
 6. Alias
 7. Rules</p>
 <p>Sample site configuration rules can be found <a href="../site_config.yaml">here</a></p>
-<h2 id="1-site-name">1. SITE NAME:</h2>
+<h2 id="1-site-name">1. SITE NAME</h2>
 <p>Site name corresponds to the site where the service is deployed and is the first thing mentioned
 in the configuration.2. Constants:
 Constants are the values which are required to be known by violation service beforehand and
 refer to values such as frame rate, image height, image width etc. etc. that remain almost the
 same in most of the sites.</p>
-<h2 id="3-states">3. States:</h2>
+<h2 id="3-states">3. States</h2>
 <p>States are the factors whose values vary and depending on those values, it is determined
 whether an object has committed a violation or not. For example, in the above sample
 configuration, for an object to commit a <code>running red light</code> violation, the value of the factor
@@ -138,7 +140,7 @@ Different values of a same factor are written in a string, seperated by pipe cha
 <code>Light:​ "red|yellow|green|black"</code>
 In the above example, Light is a factor and <code>red</code>, <code>yellow</code>, <code>green</code>, and <code>black</code> are the possible
 values.</p>
-<h2 id="4-zones">4. Zones:</h2>
+<h2 id="4-zones">4. Zones</h2>
 <p>Zones are the annotated regions on an image which are used to determine the passage of an
 object on an intersection. The figure below shows an annotated frame with zones:
 <img alt="alt text" src="../Isolated.jpg" title="Title" /></p>
@@ -199,7 +201,7 @@ them as long as it enters the Zebra region after entering the Enter region at so
 addition to the ruleline can be of the Duration parameter such as Duration: 1.5 where 1.5 is the
 duration in seconds. A rule employing the parameter Duration has been provided in the above
 sample configuration, named as <code>EnteringRightRegion</code>.</p>
-<h3 id="caveats">Caveats:</h3>
+<h3 id="caveats">Caveats</h3>
 <ol>
 <li>ALPR zones are not used in rulelines. They are just defined in the beginning of the
 configuration and then violation service determines the LPR zone of the object
@@ -208,6 +210,221 @@ committing the violation.</li>
 defined before the region used in the last ruleline of a rule.</li>
 <li>Composite zones are supported only as aliases or the zone subsection of rulelines.</li>
 </ol>
+<h3 id="sample-configurations">Sample Configurations</h3>
+<ul>
+<li>Sample SeatBelt/MobilePhone site config with <code>DEFAULT</code> sitename.</li>
+</ul>
+<pre><code class="language-yaml">DEFAULT:
+    CONSTANTS:
+        IMAGE_WIDTH: 1920
+        IMAGE_HEIGHT: 1080
+        FPS: 8 
+    STATES:
+        seatbelt: &quot;violation|normal|cant_tell&quot;
+        mobile_phone: &quot;normal|on_call|using_mobile|cant_tell&quot;
+    ZONES:
+        violation_region: [[0,0],[1920,0],[1920,1080],[0,1080]]
+    RULES:
+        Not_Wearing_Seatbelt:
+            RL1:
+                Zone: $violation_region
+                Shot: c_shot
+                States:
+                    seatbelt: 'violation'
+        Using_Mobilephone:
+            RL1:
+                Zone: $violation_region
+                Shot: c_shot
+                States:
+                    mobile_phone: 'on_call|using_mobile'
+</code></pre>
+<ul>
+<li>Sample Trajectory site config of a Site at <code>Riyadh</code></li>
+</ul>
+<pre><code class="language-yaml">RIYADH:         # Site Name
+    CONSTANTS:
+        IMAGE_WIDTH: 1920
+        IMAGE_HEIGHT: 1080
+        FPS: 7
+    STATES:       # States
+        Light: &quot;red|yellow|green|black&quot;
+        Time: &quot;Morning|Day|Evening|Night&quot;
+        Day: &quot;Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday&quot;
+    ZONES:
+        Intersection: [[857, 458], [675, 368], [159, 404], [176, 510]]
+        Left: [[4, 405], [159, 404], [176, 510], [4, 526]]
+        Right: [[757, 407], [873, 466], [1071, 437], [971, 390]]
+        Straight: [[263, 336], [516, 314], [582, 404], [244, 432]]
+        RT_Lane: [[1328, 515], [1503, 498], [1901, 597], [1727, 658]]
+        LT_Lane: [[216, 508], [393, 496], [1097, 1078], [464, 1078]]
+        Lane_3: [[393, 496], [533, 484], [1860, 1078], [1097, 1078]]
+        Lane_2: [[533, 484], [677, 473], [1917, 906], [1860, 1078]]
+        Lane_1: [[677, 473], [820, 461], [1918, 755], [1917, 906]]
+        Zebra: [[216, 508], [820, 461], [947, 507], [242, 568]]
+    ALIAS:
+        Enter: $Lane_1 + $Lane_2 + $Lane_3 + $LT_Lane + $RT_Lane
+        Exit: $Left + $Right + $Straight
+    RULES:
+        # Event when an object runs a red light
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection while the light is red and then goes to
+        # 2- Zebra region and then to
+        # 3- Intersection and stays there for 1 second (with early capture) and then
+            # Also, Since regions are disjoint empty ruleLines RL3 and RL6 are used
+        Failure_to_Stop_at_RL:
+            RL1: 
+                Zone: $Enter - $Zebra
+                Shot: a_shot
+                States:
+                    Light: 'red'
+            RL2:
+                Zone: $Zebra
+                Shot: b_shot
+                States:
+                    Light: 'red'
+            RL3:
+                Zone: $
+            RL4:
+                Zone: $Intersection
+                Duration: 1
+                Shot: c_shot
+                States:
+                    Light: 'red'
+            RL5:
+                Zone: $Intersection
+            RL6:
+                Zone: $ 
+            RL7:
+                Zone: $Exit
+        # Event when an object takes a left turn from straight only lane
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection then goes to
+        # 2- then to intersection of zebra with (Enter - Left) to 
+        # 3- Intersection to
+        # 4- Left region
+        Left_Turn_from_Wrong_Lane:
+            RL1:
+                Zone: ($Enter - $LT_Lane) - $Zebra
+                Shot: a_shot
+            RL2:
+                Zone: ($Enter - $LT_Lane) * $Zebra
+                Shot: b_shot
+            RL3:
+                Zone: $
+            RL4:
+                Zone: $Intersection
+                Shot: c_shot
+            RL5:
+                Zone: $Left
+        # Event when an object goes straight from a turn only lane
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection then goes to
+        # 2- then to intersection of zebra with Left Lane to 
+        # 3- Intersection to
+        # 4- Straight region
+        Straight_from_Turn_Only_Lane:
+            RL1:
+                Zone: $LT_Lane - ($LT_Lane * $Zebra)
+                Shot: a_shot
+            RL2:
+                Zone: $LT_Lane * $Zebra
+                Shot: b_shot
+            RL3:
+                Zone: $
+            RL4:
+                Zone: $Intersection
+            RL5:
+                Zone: $Straight
+                Shot: c_shot
+        # Event when an object goes right from the wrong lane
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection then goes to
+        # 2- then to intersection of zebra with intersection of Enter and Left Lane to 
+        # 3- Intersection to
+        # 4- Right region
+        Right_Turn_from_Wrong_Lane:
+            RL1:
+                Zone: ($Enter - $RT_Lane) - $Zebra
+                Shot: a_shot
+            RL2:
+                Zone: ($Enter * $RT_Lane) * $Zebra
+                Shot: b_shot
+            RL3:
+                Zone: $
+            RL4:
+                Zone: $Intersection
+            RL5:
+                Zone: $Right
+                Shot: c_shot
+        # Event when an object blocks the pedestrain crossing
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is behind intersection then goes to
+        # 2- zebra and stays there for 3 seconds
+        Block_Pedestrian_Crossing:
+            RL1:
+                Zone: $Enter - $RT_Lane - $Zebra
+                Shot: a_shot
+            RL2:
+                Zone: $Zebra
+                Duration: 3
+                Shot: c_shot
+                States:
+                    Light: 'red'
+        # Event when an object goes into a restricted lane
+        # This event has 3 shots. The object path follows the following pattern:
+        # 1- Object is in a non-restricted zone
+        # 2- Object goes to restricted zone and stays there for 1 second
+        Driving_in_Restricted_Lane:
+            RL1:
+                Zone: $Enter - $LT_Lane
+                Shot: a_shot
+            RL2:
+                Zone: $LT_Lane
+                Duration: 1
+                Shot: b_shot
+</code></pre>
+<ul>
+<li>Sample SB/MP site config for <code>AI_ACTIVE</code></li>
+</ul>
+<pre><code class="language-yaml">AI_ACTIVE:         # Site name
+    CONSTANTS:
+        IMAGE_WIDTH: 1920
+        IMAGE_HEIGHT: 1080
+        FPS: 8 
+    STATES:              # States consist of seatbelt and mobile phone usage
+        Seatbelt: &quot;violation|normal|cant_tell&quot;
+        mobile_phone: &quot;normal|on_call|using_mobile|cant_tell&quot;
+    ZONES:
+        violation_region: [[1,161],[1530,92],[1917,374],[1916,804],[0,943], [1,161]]
+    RULES:
+        # Event when a driver is not wearing seatbelt
+        # This event has just 1 shot. A violation region is defined and when an object
+        # passes throught that region not wearing seatbelt, this event is triggered
+        Not_Wearing_Seatbelt:
+            RL1:
+                Zone: $violation_region
+                Shot: c_shot
+                States:
+                    Seatbelt: 'violation'
+        # Event when a driver is using mobile phone
+        # This event has just 1 shot. A violation region is defined and when an object
+        # passes throught that region using mobile phone, this event is triggered
+        Using_Mobilephone:
+            RL1:
+                Zone: $violation_region
+                Shot: c_shot
+                States:
+                    mobile_phone: 'using_mobile'
+        # Event when a driver is on call
+        # This event has just 1 shot. A violation region is defined and when an object
+        # passes throught that region using mobile phone, this event is triggered
+        On_Call:
+            RL1:
+                Zone: $violation_region
+                Shot: c_shot
+                States:
+                    mobile_phone: 'on_call
+</code></pre>
               
             </div>
           </div>
