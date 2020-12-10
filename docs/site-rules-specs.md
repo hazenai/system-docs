@@ -48,22 +48,22 @@ Each zone involved in aliasing is preceded by a $ sign.
 ## 7. Rules:
 The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
 any spaces in it.
-`RunningRedLight:\
-    RL1:\
-        Zone: $Enter\
-        Shot: a_shot\
-        States:\
-            vehicle_category: '!person'\
-            Light: ‘red’\
-    RL2:\
-        Zone: $\
-    RL3:\
-        Zone: $Zebra_crossing\
-        Shot: b_shot\
-    States:\
-        Light: ‘red’\
-    RL4:\
-        Zone: $Exit`\
+`RunningRedLight:<br />
+    RL1:<br />
+        Zone: $Enter<br />
+        Shot: a_shot<br />
+        States:<br />
+            vehicle_category: '!person'<br />
+            Light: ‘red’<br />
+    RL2:<br />
+        Zone: $<br />
+    RL3:<br />
+        Zone: $Zebra_crossing<br />
+        Shot: b_shot<br />
+    States:<br />
+        Light: ‘red’<br />
+    RL4:<br />
+        Zone: $Exit`<br />
 
 Here, ‘RunningRedLight’ is the name of the rule. Rulelines are defined later on as ‘RL1’, ‘RL2’,
 ‘RL3’ and ‘RL4’. This rule defines a violation RunningRedLight in which an object commits a
