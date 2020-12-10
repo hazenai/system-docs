@@ -34,7 +34,7 @@ values.
 Zones are the annotated regions on an image which are used to determine the passage of an
 object on an intersection. The figure below shows an annotated frame with zones:
 
-![alt text](Isolated.jpg "Title")
+![alt text](static/Isolated.jpg "Title")
 
 Zones are defined as multipolygons and the corners of that polygon are mentioned in the
 configuration.
