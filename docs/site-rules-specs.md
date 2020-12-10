@@ -51,21 +51,37 @@ Each zone involved in aliasing is preceded by a $ sign.
 The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
 any spaces in it.
 `RunningRedLight:
+
     RL1:
+
         Zone: $Enter
+
         Shot: a_shot
+
         States:
+
             vehicle_category: '!person'
+
             Light: ‘red’
+
     RL2:
+
         Zone: $
+
     RL3:
+
         Zone: $Zebra_crossing
+
         Shot: b_shot
+
     States:
+
         Light: ‘red’
+
     RL4:
+
         Zone: $Exit`
+        
 
 Here, ‘RunningRedLight’ is the name of the rule. Rulelines are defined later on as ‘RL1’, ‘RL2’,
 ‘RL3’ and ‘RL4’. This rule defines a violation RunningRedLight in which an object commits a
@@ -83,7 +99,8 @@ applies to every vehicle category except a person.
 * ‘|’ which performs the OR operation. For instance, if it was required that even crossing the
 region while the light is yellow is a violation, then State Light could be defined as Light:
 ‘red|yellow’.
-* AND operator is not supported because the value of states are mutually exclusive, and there
+
+AND operator is not supported because the value of states are mutually exclusive, and there
 can’t be two values of a single factor at a given time. Rest of the rulelines are defined in the same
 way as RL1 but RL2 is a unique ruleline, which is written when the regions between RL1 and RL3are disjoint. In that case a ruleline with Zone $ is defined, which corresponds to any region. So, if
 the Enter region and Zebra regions are disjoint, we don’t care where the object goes in between
