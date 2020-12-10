@@ -248,7 +248,7 @@ DEFAULT:
         IMAGE_WIDTH: 1920
         IMAGE_HEIGHT: 1080
         FPS: 7
-    STATES:       # States
+    STATES:
         Light: &quot;red|yellow|green|black&quot;
         Time: &quot;Morning|Day|Evening|Night&quot;
         Day: &quot;Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday&quot;
@@ -388,12 +388,12 @@ DEFAULT:
 <ul>
 <li>Sample SB/MP site config for <code>AI_ACTIVE</code></li>
 </ul>
-<pre><code class="language-yaml">AI_ACTIVE:         # Site name
+<pre><code class="language-yaml">AI_ACTIVE:
     CONSTANTS:
         IMAGE_WIDTH: 1920
         IMAGE_HEIGHT: 1080
         FPS: 8 
-    STATES:              # States consist of seatbelt and mobile phone usage
+    STATES:
         Seatbelt: &quot;violation|normal|cant_tell&quot;
         mobile_phone: &quot;normal|on_call|using_mobile|cant_tell&quot;
     ZONES:
