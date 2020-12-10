@@ -8,14 +8,14 @@ A configuration consists of 6 or 7 parameters depending on the requirements whic
 6. Alias
 7. Rules
 
-1. SITE NAME:
+## 1. SITE NAME:
 Site name corresponds to the site where the service is deployed and is the first thing mentioned
 in the configuration.2. Constants:
 Constants are the values which are required to be known by violation service beforehand and
 refer to values such as frame rate, image height, image width etc. etc. that remain almost the
 same in most of the sites.
 
-3. States:
+## 3. States:
 States are the factors whose values vary and depending on those values, it is determined
 whether an object has committed a violation or not. For example, in the above sample
 configuration, for an object to commit a “running red light” violation, the value of the factor
@@ -25,7 +25,7 @@ Light:​ "red|yellow|green|black"
 In the above example, Light is a factor and “red”, “yellow”, “green”, and “black” are the possible
 values.
 
-4. Zones:
+## 4. Zones:
 Zones are the annotated regions on an image which are used to determine the passage of an
 object on an intersection. The figure below shows an annotated frame with zones:
 ![alt text](Isolated.jpg "Title")
@@ -37,15 +37,15 @@ Following operations can be performed on zones:
 ● ‘-’ which subtracts one zone from another zone
 ● ‘*’ which gives the intersection of two zones
 
-5. ALPR Zones:
+## 5. ALPR Zones:
 ALPR zones are defined if LPR is required in some scenarios.
 
-6. Alias:
+## 6. Alias:
 Alias is a name given to a combination of zones.
 Enter:​ $Lane_1 + $Lane_2 + $Lane_3
 Each zone involved in aliasing is preceded by a $ sign.
 
-7. Rules:
+## 7. Rules:
 The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
 any spaces in it.
 `RunningRedLight:
