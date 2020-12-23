@@ -4,4 +4,5 @@ nav:
     - Basic Installation: installation.md
     - Site Rules Specification: site-rules-specs.md
     - Flashing Instructions: flash.md
+    - Utilities: utilities.md
 theme: readthedocs
