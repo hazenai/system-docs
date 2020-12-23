@@ -1,21 +1,21 @@
 # Utilities / Snippets
 
-### Gstreamer pipelines For Image Cache
-- For H.265
+## Gstreamer pipelines For Image Cache
+- **For H.265**
 ```
 rtspsrc location=rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/ latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink
 ```
-- For H.264
+- **For H.264**
 ```
 rtspsrc location=rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/ latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink
 ```
-- For JPEG Encoding
+- **For JPEG Encoding**
 ```
 rtspsrc location=rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/ latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! jpegenc ! image/jpeg ! appsink
 ```
 
 
-### Converting OD Engine From `.onnx` to `.trt`
+## Converting OD Engine From `.onnx` to `.trt`
 - For static engine
 ```
 /usr/src/tensorrt/bin/trtexec --onnx=/workspace/yolov3_torch1.onnx --saveEngine=./yolov3_torch1.trt --fp16 --verbose --workspace=2048
@@ -23,4 +23,19 @@ rtspsrc location=rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/ 
 - For dynamic shape engine
 ```
 /usr/src/tensorrt/bin/trtexec --onnx=./engine/epoch99sim.onnx --saveEngine=./engine/epoch99sim.trt --fp16 --verbose --workspace=2028 --explicitBatch --optShapes=input:1x3x256x448 --minShapes=input:1x3x256x448 --maxShapes=input:128x3x256x448
+```
+
+## Changing System stream to rtsp stream
+#### Prerequisites
+- A working h264 or h265 encoded rtsp video stream url.
+#### Changing Config
+- Change `camid` key in `service_configs/image_cache/config.yaml` to gstreamer pipeline with your rtsp stream as source. For Example:
+For H265 encoded stream 
+```
+camid: "rtspsrc location=rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/ latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
+```
+- If there is any ALPR image-cache being used. Also change it's `camid` key in `service_configs/image_cache_alpr/config.yaml`.
+- Restart overview and alpr image-cache services.
+```
+docker-compose --comptibility restart image-cache image-cache-alpr
 ```
