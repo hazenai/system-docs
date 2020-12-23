@@ -74,4 +74,5 @@ Select Power Model. ID: 2
 `cd /media/sdcard/hazen-test/imagetars/hazenclient/`
 * Run the following command `sudo cp -r ./sbmp/* ./`
 * Now, Run the services `sudo ./run-services.sh`
+* For further configuration, see [Trajectory](./traj-config.md), [SBMP](./sbmp-config.md) configuration guides.
 
