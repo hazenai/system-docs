@@ -70,13 +70,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#converting-od-engine-from-onnx-to-trt">Converting OD Engine From .onnx to .trt</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#changing-system-stream-to-rtsp-stream">Changing System stream to rtsp stream</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#changing-config">Changing Config</a>
-    </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#frequently-used-docker-and-docker-compose-commands">Frequently used docker and docker-compose commands</a>
     </li>
     </ul>
                     </li>
@@ -118,17 +112,16 @@
 <ul>
 <li><strong>For H.265</strong></li>
 </ul>
-<pre><code>rtspsrc location=rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/ latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink
+<pre><code>rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink
 </code></pre>
-<ul>
-<li><strong>For H.264</strong></li>
-</ul>
-<pre><code>rtspsrc location=rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/ latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink
+<p>An Example of password protected RTSP url can be <code>rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/</code>
+- <strong>For H.264</strong></p>
+<pre><code>rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink
 </code></pre>
 <ul>
 <li><strong>For JPEG Encoding</strong></li>
 </ul>
-<pre><code>rtspsrc location=rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/ latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! jpegenc ! image/jpeg ! appsink
+<pre><code>rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! jpegenc ! image/jpeg ! appsink
 </code></pre>
 <h2 id="converting-od-engine-from-onnx-to-trt">Converting OD Engine From <code>.onnx</code> to <code>.trt</code></h2>
 <ul>
@@ -141,23 +134,49 @@
 </ul>
 <pre><code>/usr/src/tensorrt/bin/trtexec --onnx=./engine/epoch99sim.onnx --saveEngine=./engine/epoch99sim.trt --fp16 --verbose --workspace=2028 --explicitBatch --optShapes=input:1x3x256x448 --minShapes=input:1x3x256x448 --maxShapes=input:128x3x256x448
 </code></pre>
-<h2 id="changing-system-stream-to-rtsp-stream">Changing System stream to rtsp stream</h2>
-<h4 id="prerequisites">Prerequisites</h4>
+<h2 id="frequently-used-docker-and-docker-compose-commands">Frequently used <code>docker</code> and <code>docker-compose</code> commands</h2>
 <ul>
-<li>A working h264 or h265 encoded rtsp video stream url.</li>
+<li>To start all services</li>
 </ul>
-<h4 id="changing-config">Changing Config</h4>
-<ul>
-<li>Change <code>camid</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
-For H265 encoded stream </li>
-</ul>
-<pre><code>camid: &quot;rtspsrc location=rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/ latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink&quot;
+<pre><code>docker-compose --compatibility up -d
 </code></pre>
 <ul>
-<li>If there is any ALPR image-cache being used. Also change it's <code>camid</code> key in <code>service_configs/image_cache_alpr/config.yaml</code>.</li>
-<li>Restart overview and alpr image-cache services.</li>
+<li>To Shutdown the system</li>
 </ul>
-<pre><code>docker-compose --comptibility restart image-cache image-cache-alpr
+<pre><code>docker-compose --compatibility down --volume
+</code></pre>
+<ul>
+<li>To Restart single or multiple service</li>
+</ul>
+<pre><code>docker-compose --compatibility restart &lt;service_name1&gt; &lt;service_name2&gt; ...
+</code></pre>
+<p>For Example to restart image cache service:</p>
+<pre><code>docker-compose --compatibility restart image-cache
+</code></pre>
+<ul>
+<li>To Stop a service</li>
+</ul>
+<pre><code>docker-compose --compatibility stop &lt;service_name&gt;
+</code></pre>
+<ul>
+<li>To Start a service</li>
+</ul>
+<pre><code>docker-compose --compatibility start &lt;service_name&gt; 
+</code></pre>
+<ul>
+<li>To see logs of a service</li>
+</ul>
+<pre><code>docker logs -f &lt;container_name&gt;
+</code></pre>
+<ul>
+<li>To see status of services</li>
+</ul>
+<pre><code>docker ps
+</code></pre>
+<ul>
+<li>To see system resource usage of services</li>
+</ul>
+<pre><code>sudo docker stats
 </code></pre>
               
             </div>
