@@ -32,6 +32,11 @@ rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph264depay ! h264
 ```
 
 ## Frequently used `docker` and `docker-compose` commands
+
+- To pull images from docker registry
+```
+docker-compose pull
+```
 - To start all services
 ```
 docker-compose --compatibility up -d
@@ -67,4 +72,32 @@ docker ps
 - To see system resource usage of services
 ```
 sudo docker stats
+```
+
+## `systemctl` commands
+
+systemctl is part of systemd which is a service managment tool responsible for starting services on boot and controlling the state of these services later on.
+Following services are being run as Systemd services and systemctl will be used to control them.
+
+- `docker`
+- `sshtunnel`
+
+**Check status of a service**
+```
+sudo systemctl status <service>
+```
+
+**Restart a service**
+```
+sudo systemctl restart <service>
+```
+
+**Stop a service**
+```
+sudo systemctl stop <service>
+```
+
+**Enable service to be started on boot**
+```
+sudo systemctl enable <service>
 ```
