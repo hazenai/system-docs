@@ -72,6 +72,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#frequently-used-docker-and-docker-compose-commands">Frequently used docker and docker-compose commands</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#systemctl-commands">systemctl commands</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -138,6 +140,11 @@
 </code></pre>
 <h2 id="frequently-used-docker-and-docker-compose-commands">Frequently used <code>docker</code> and <code>docker-compose</code> commands</h2>
 <ul>
+<li>To pull images from docker registry</li>
+</ul>
+<pre><code>docker-compose pull
+</code></pre>
+<ul>
 <li>To start all services</li>
 </ul>
 <pre><code>docker-compose --compatibility up -d
@@ -179,6 +186,25 @@
 <li>To see system resource usage of services</li>
 </ul>
 <pre><code>sudo docker stats
+</code></pre>
+<h2 id="systemctl-commands"><code>systemctl</code> commands</h2>
+<p>systemctl is part of systemd which is a service managment tool responsible for starting services on boot and controlling the state of these services later on.
+Following services are being run as Systemd services and systemctl will be used to control them.</p>
+<ul>
+<li><code>docker</code></li>
+<li><code>sshtunnel</code></li>
+</ul>
+<p><strong>Check status of a service</strong></p>
+<pre><code>sudo systemctl status &lt;service&gt;
+</code></pre>
+<p><strong>Restart a service</strong></p>
+<pre><code>sudo systemctl restart &lt;service&gt;
+</code></pre>
+<p><strong>Stop a service</strong></p>
+<pre><code>sudo systemctl stop &lt;service&gt;
+</code></pre>
+<p><strong>Enable service to be started on boot</strong></p>
+<pre><code>sudo systemctl enable &lt;service&gt;
 </code></pre>
               
             </div>
