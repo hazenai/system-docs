@@ -60,7 +60,9 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#running-the-edge-script">Running the Edge Script</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#running-the-services">Running the services</a>
+    <li class="toctree-l2"><a class="reference internal" href="#running-the-services-trajectory-configuration">Running the services (Trajectory Configuration)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#running-the-services-trajectory-configuration_1">Running the services (Trajectory Configuration)</a>
     </li>
     </ul>
                     </li>
@@ -71,6 +73,10 @@
                 </ul>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../flash/">Flashing Instructions</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../camera-calibration/">Camera Calibration</a>
                     </li>
                 </ul>
                 <ul>
@@ -183,13 +189,36 @@ Select Power Model. ID: 2
 <li>Now, script will start installing system dependencies.</li>
 <li>After system dependencies installation, script will install required services. This process may take <code>20-30 mins</code>.</li>
 </ul>
-<h2 id="running-the-services">Running the services</h2>
+<h2 id="running-the-services-trajectory-configuration">Running the services (Trajectory Configuration)</h2>
+<ul>
+<li>Move to following directory <code>cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/</code>. For example, in this case, I will move to
+<code>cd /media/sdcard/hazen-test/imagetars/hazenclient/</code></li>
+<li>Run the following command <code>sudo cp -r ./traj/* ./</code></li>
+<li>Make sure you have a working h264 or h265 encoded rtsp video stream url.</li>
+<li>Change <code>camid</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
+For H265 encoded stream </li>
+</ul>
+<pre><code>camid: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink&quot;
+</code></pre>
+<ul>
+<li>If there is any ALPR image-cache being used. Also change it's <code>camid</code> key in <code>service_configs/image_cache_alpr/config.yaml</code>.</li>
+<li>Configuring Violation regions and rules</li>
+<li>Now, Run the services <code>sudo ./run-services.sh</code></li>
+</ul>
+<h2 id="running-the-services-trajectory-configuration_1">Running the services (Trajectory Configuration)</h2>
 <ul>
 <li>Move to following directory <code>cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/</code>. For example, in this case, I will move to
 <code>cd /media/sdcard/hazen-test/imagetars/hazenclient/</code></li>
 <li>Run the following command <code>sudo cp -r ./sbmp/* ./</code></li>
+<li>Make sure you have a working h264 or h265 encoded rtsp video stream url.</li>
+<li>Change <code>camid</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
+For H265 encoded stream</li>
+</ul>
+<pre><code>camid: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink&quot;
+</code></pre>
+<ul>
+<li>Configuring Violation regions and rules</li>
 <li>Now, Run the services <code>sudo ./run-services.sh</code></li>
-<li>For further configuration, see <a href="../traj-config/">Trajectory</a>, <a href="../sbmp-config/">SBMP</a> configuration guides.</li>
 </ul>
               
             </div>
