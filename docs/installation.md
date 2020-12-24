@@ -85,7 +85,7 @@ camid: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depa
 * Configuring Violation regions and rules
 * Now, Run the services `sudo ./run-services.sh`
 
-## Running the services (Trajectory Configuration)
+## Running the services (SBMP Configuration)
 
 * Move to following directory `cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/`. For example, in this case, I will move to
 `cd /media/sdcard/hazen-test/imagetars/hazenclient/`
