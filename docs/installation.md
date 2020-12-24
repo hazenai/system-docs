@@ -68,11 +68,34 @@ Select Power Model. ID: 2
 * Now, script will start installing system dependencies.
 * After system dependencies installation, script will install required services. This process may take `20-30 mins`.
 
-## Running the services
+## Running the services (Trajectory Configuration)
+
+* Move to following directory `cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/`. For example, in this case, I will move to
+`cd /media/sdcard/hazen-test/imagetars/hazenclient/`
+* Run the following command `sudo cp -r ./traj/* ./`
+* Make sure you have a working h264 or h265 encoded rtsp video stream url.
+* Change `camid` key in `service_configs/image_cache/config.yaml` to gstreamer pipeline with your rtsp stream as source. For Example:
+For H265 encoded stream 
+
+```
+camid: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
+```
+
+* If there is any ALPR image-cache being used. Also change it's `camid` key in `service_configs/image_cache_alpr/config.yaml`.
+* Configuring Violation regions and rules
+* Now, Run the services `sudo ./run-services.sh`
+
+## Running the services (Trajectory Configuration)
 
 * Move to following directory `cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/`. For example, in this case, I will move to
 `cd /media/sdcard/hazen-test/imagetars/hazenclient/`
 * Run the following command `sudo cp -r ./sbmp/* ./`
-* Now, Run the services `sudo ./run-services.sh`
-* For further configuration, see [Trajectory](./traj-config.md), [SBMP](./sbmp-config.md) configuration guides.
+* Make sure you have a working h264 or h265 encoded rtsp video stream url.
+* Change `camid` key in `service_configs/image_cache/config.yaml` to gstreamer pipeline with your rtsp stream as source. For Example:
+For H265 encoded stream
 
+```
+camid: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
+```
+* Configuring Violation regions and rules
+* Now, Run the services `sudo ./run-services.sh`

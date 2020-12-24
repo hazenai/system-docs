@@ -4,5 +4,6 @@ nav:
     - Basic Installation: installation.md
     - Site Rules Specification: site-rules-specs.md
     - Flashing Instructions: flash.md
+    - Camera Calibration: camera-calibration.md
     - Utilities: utilities.md
 theme: readthedocs
