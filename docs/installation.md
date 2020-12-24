@@ -82,7 +82,7 @@ camid: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depa
 ```
 
 * If there is any ALPR image-cache being used. Also change it's `camid` key in `service_configs/image_cache_alpr/config.yaml`.
-* Configuring Violation regions and rules
+* Configure Violation regions and rules
 * Now, Run the services `sudo ./run-services.sh`
 
 ## Running the services (SBMP Configuration)
@@ -97,5 +97,5 @@ For H265 encoded stream
 ```
 camid: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
 ```
-* Configuring Violation regions and rules
+* Configure Violation regions and rules
 * Now, Run the services `sudo ./run-services.sh`
