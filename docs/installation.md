@@ -1,4 +1,4 @@
-# Basic Installation Guide for Seatbelt and Mobile phone System Deployment
+# Basic Installation Guide for Trajectory and SBMP System Deployment
 
 ## Prerequisites
 
