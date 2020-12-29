@@ -232,6 +232,7 @@ delay to adjust the fps.</li>
 <li>Open <code>object_detector</code> config for changes and update <code>trt_preprocessor_input_dims</code>. This take frames dimensions in following format [height, width, channels]. If you have not resized the frames
 in gstreamer pipeline in <code>image_cache</code>, then get frame  dimensions (resolution) from camera settings. If you have resized frame in gstreamer pipeline, use them. In above example, we have resized frames 
 to 1920x1080, so we will update it [1080, 1920, 3].</li>
+<li>If you have enabled jpeg encoding in image cache, change <code>jpeg_encoded</code> to <code>true</code> in od config as well.</li>
 <li>Save and exit od config.</li>
 <li>Configure Violation regions and rules</li>
 <li>Now, Run the services <code>sudo ./run-services.sh</code></li>
