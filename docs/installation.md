@@ -96,12 +96,20 @@ cam_id: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265dep
 * Move to following directory `cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/`. For example, in this case, I will move to
 `cd /media/sdcard/hazen-test/imagetars/hazenclient/`
 * Run the following command `sudo cp -r ./sbmp/* ./`
-* Make sure you have a working h264 or h265 encoded rtsp video stream url.
-* Change `cam_id` key in `service_configs/image_cache/config.yaml` to gstreamer pipeline with your rtsp stream as source. For Example:
-For H265 encoded stream
+* Open `image_cache` config. `sudo nano service_configs/image_cache/config.yaml`
+* If your have a working h264 or h265 encoded rtsp video stream url and want to use that then change `cam_id` key in `service_configs/image_cache/config.yaml` to gstreamer pipeline with your rtsp stream as source. For Example:
+For H265 encoded stream, following gstreamer pipeline will work (Also note: this pipeline is resizing frames to 1920x1080)
 
 ```
-cam_id: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
+cam_id: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! appsink"
 ```
+* If you are using rtsp stream with gstreamer pipeline, update `encoder` key. Change its value from `ffmpeg` to `gstreamer`
+* If you are using rtsp stream, update `delay_for_file_ms` key. Make its value `0`. Because rtsp stream has built-in delay between frames. This value is used while running from video files and adding a
+delay to adjust the fps.
+* save(CTRL+S) changes in image-cache config and exit (CTRL+X)
+* Open `object_detector` config for changes and update `trt_preprocessor_input_dims`. This take frames dimensions in following format [height, width, channels]. If you have not resized the frames
+in gstreamer pipeline in `image_cache`, then get frame  dimensions (resolution) from camera settings. If you have resized frame in gstreamer pipeline, use them. In above example, we have resized frames 
+to 1920x1080, so we will update it [1080, 1920, 3].
+* Save and exit od config.
 * Configure Violation regions and rules
 * Now, Run the services `sudo ./run-services.sh`
