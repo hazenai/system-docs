@@ -106,6 +106,7 @@ cam_id: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265dep
 * If you are using rtsp stream with gstreamer pipeline, update `encoder` key. Change its value from `ffmpeg` to `gstreamer`
 * If you are using rtsp stream, update `delay_for_file_ms` key. Make its value `0`. Because rtsp stream has built-in delay between frames. This value is used while running from video files and adding a
 delay to adjust the fps.
+* If you are using jpeg encoding in gstreamer pipeline, then change `jpeg_encoding` to `true`
 * save(CTRL+S) changes in image-cache config and exit (CTRL+X)
 * Open `object_detector` config for changes and update `trt_preprocessor_input_dims`. This take frames dimensions in following format [height, width, channels]. If you have not resized the frames
 in gstreamer pipeline in `image_cache`, then get frame  dimensions (resolution) from camera settings. If you have resized frame in gstreamer pipeline, use them. In above example, we have resized frames 

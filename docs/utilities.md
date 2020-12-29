@@ -2,22 +2,25 @@
 
 ## Gstreamer pipelines For Image Cache
 
-- **For H.265**
+- **For H.265 (Resizing frames to 1920x1080)**
 ```
-rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink
+rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! appsink
 ```
-An Example of password protected RTSP url can be `rtsp://admin:hazen123@192.168.1.54:554/Streaming/Channels/101/`
+An Example of password protected RTSP url can be `rtsp://username:password@192.168.1.90:554/Streaming/Channels/101/`
 
-- **For H.264**
+- **For H.264 (Resizing Frames to 1920x1080)**
 ```
-rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink
-```
-
-- **For JPEG Encoding**
-```
-rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! jpegenc ! image/jpeg ! appsink
+rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! appsink
 ```
 
+- **H264 with JPEG Encoding Enabled and Resizing**
+```
+rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! jpegenc ! image/jpeg ! appsink
+```
+- **H265 with JPEG Encoding Enabled and Resizing**
+```
+rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! jpegenc ! image/jpeg ! appsink
+```
 
 ## Converting OD Engine From `.onnx` to `.trt`
 
