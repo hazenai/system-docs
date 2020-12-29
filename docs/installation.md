@@ -115,3 +115,4 @@ to 1920x1080, so we will update it [1080, 1920, 3].
 * Save and exit od config.
 * Configure Violation regions and rules
 * Now, Run the services `sudo ./run-services.sh`
+* To check your site id, do `cat .env` and copy `SITE_ID`
