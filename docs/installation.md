@@ -12,9 +12,10 @@
 * Open terminal `CTRL + ALT + T`.
 * Check if `python3` is installed on device `python3 --version`. If not [follow this link to install](https://phoenixnap.com/kb/how-to-install-python-3-ubuntu)
 * Check if docker is installed and running `sudo docker info`. If docker is running, make sure it's `Server Version` is `19.03.6`
-* Add current user to `docker` group
+* Add current user to `docker` group and then reboot
 ```bash
 sudo usermod -aG docker $USER
+sudo reboot
 ```
 * Check if nvidia-container-runtime is installed `nvidia-container-runtime --version`. If it's not installed, then install
 ```bash
