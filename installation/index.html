@@ -61,8 +61,30 @@
     <li class="toctree-l2"><a class="reference internal" href="#running-the-edge-script">Running the Edge Script</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#running-the-services-trajectory-configuration">Running the services (Trajectory Configuration)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-image-cache">Config Changes in Image Cache</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-object-detector">Config Changes in Object Detector</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-image-cache-alpr">Config Changes in Image Cache Alpr</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-violation-service">Config Changes in Violation Service</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#check-your-site-id">Check your SITE ID</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#running-the-services-sbmp-configuration">Running the services (SBMP Configuration)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-image-cache_1">Config Changes in Image Cache</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-object-detector_1">Config Changes in Object Detector</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-violation-service_1">Config Changes in Violation Service</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#check-your-site-id_1">Check your SITE ID</a>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -201,22 +223,9 @@ Select Power Model. ID: 2
 <li>Move to following directory <code>cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/</code>. For example, in this case, I will move to
 <code>cd /media/sdcard/hazen-test/imagetars/hazenclient/</code></li>
 <li>Run the following command <code>sudo cp -r ./traj/* ./</code></li>
-<li>Make sure you have a working h264 or h265 encoded rtsp video stream url.</li>
-<li>Change <code>cam_id</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
-For H265 encoded stream </li>
 </ul>
-<pre><code>cam_id: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink&quot;
-</code></pre>
+<h3 id="config-changes-in-image-cache">Config Changes in Image Cache</h3>
 <ul>
-<li>If there is any ALPR image-cache being used. Also change it's <code>camid</code> key in <code>service_configs/image_cache_alpr/config.yaml</code>.</li>
-<li>Configure Violation regions and rules</li>
-<li>Now, Run the services <code>sudo ./run-services.sh</code></li>
-</ul>
-<h2 id="running-the-services-sbmp-configuration">Running the services (SBMP Configuration)</h2>
-<ul>
-<li>Move to following directory <code>cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/</code>. For example, in this case, I will move to
-<code>cd /media/sdcard/hazen-test/imagetars/hazenclient/</code></li>
-<li>Run the following command <code>sudo cp -r ./sbmp/* ./</code></li>
 <li>Open <code>image_cache</code> config. <code>sudo nano service_configs/image_cache/config.yaml</code></li>
 <li>If your have a working h264 or h265 encoded rtsp video stream url and want to use that then change <code>cam_id</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
 For H265 encoded stream, following gstreamer pipeline will work (Also note: this pipeline is resizing frames to 1920x1080)</li>
@@ -229,13 +238,69 @@ For H265 encoded stream, following gstreamer pipeline will work (Also note: this
 delay to adjust the fps.</li>
 <li>If you are using jpeg encoding in gstreamer pipeline, then change <code>jpeg_encoding</code> to <code>true</code></li>
 <li>save(CTRL+S) changes in image-cache config and exit (CTRL+X)</li>
+</ul>
+<h3 id="config-changes-in-object-detector">Config Changes in Object Detector</h3>
+<ul>
 <li>Open <code>object_detector</code> config for changes and update <code>trt_preprocessor_input_dims</code>. This take frames dimensions in following format [height, width, channels]. If you have not resized the frames
-in gstreamer pipeline in <code>image_cache</code>, then get frame  dimensions (resolution) from camera settings. If you have resized frame in gstreamer pipeline, use them. In above example, we have resized frames 
+in gstreamer pipeline in <code>image_cache</code>, then get frame  dimensions (resolution) from camera settings. If you have resized frame in gstreamer pipeline, use them. In above example, we have resized frames
 to 1920x1080, so we will update it [1080, 1920, 3].</li>
 <li>If you have enabled jpeg encoding in image cache, change <code>jpeg_encoded</code> to <code>true</code> in od config as well.</li>
 <li>Save and exit od config.</li>
+</ul>
+<h3 id="config-changes-in-image-cache-alpr">Config Changes in Image Cache Alpr</h3>
+<ul>
+<li>Open <code>image_cache_alpr</code> config. <code>sudo nano service_configs/image_cache_alpr/config.yaml</code></li>
+<li>Update <code>cam_id</code>. Use H265 or H264 encoding pipeline depending on your camera settings. But here resize to <code>2560x1440</code></li>
+<li>Update <code>encoder</code> key</li>
+<li>Update <code>delay_for_file_ms</code> key</li>
+<li>Keep <code>jpeg_encoding</code> to <code>false</code> here. Also dont use jpeg encoding in gstreamer pipeline here.</li>
+<li>Save and Exit.</li>
+</ul>
+<h3 id="config-changes-in-violation-service">Config Changes in Violation Service</h3>
+<ul>
 <li>Configure Violation regions and rules</li>
 <li>Now, Run the services <code>sudo ./run-services.sh</code></li>
+</ul>
+<h3 id="check-your-site-id">Check your SITE ID</h3>
+<ul>
+<li>To check your site id, do <code>cat .env</code> and copy <code>SITE_ID</code></li>
+</ul>
+<h2 id="running-the-services-sbmp-configuration">Running the services (SBMP Configuration)</h2>
+<ul>
+<li>Move to following directory <code>cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/</code>. For example, in this case, I will move to
+<code>cd /media/sdcard/hazen-test/imagetars/hazenclient/</code></li>
+<li>Run the following command <code>sudo cp -r ./sbmp/* ./</code></li>
+</ul>
+<h3 id="config-changes-in-image-cache_1">Config Changes in Image Cache</h3>
+<ul>
+<li>Open <code>image_cache</code> config. <code>sudo nano service_configs/image_cache/config.yaml</code></li>
+<li>If your have a working h264 or h265 encoded rtsp video stream url and want to use that then change <code>cam_id</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
+For H265 encoded stream, following gstreamer pipeline will work (Also note: this pipeline is resizing frames to 2560x1440)</li>
+</ul>
+<pre><code>cam_id: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=2560, height=1440, format=(string)BGRx ! appsink&quot;
+</code></pre>
+<ul>
+<li>If you are using rtsp stream with gstreamer pipeline, update <code>encoder</code> key. Change its value from <code>ffmpeg</code> to <code>gstreamer</code></li>
+<li>If you are using rtsp stream, update <code>delay_for_file_ms</code> key. Make its value <code>0</code>. Because rtsp stream has built-in delay between frames. This value is used while running from video files and adding a
+delay to adjust the fps.</li>
+<li>If you are using jpeg encoding in gstreamer pipeline, then change <code>jpeg_encoding</code> to <code>true</code></li>
+<li>save(CTRL+S) changes in image-cache config and exit (CTRL+X)</li>
+</ul>
+<h3 id="config-changes-in-object-detector_1">Config Changes in Object Detector</h3>
+<ul>
+<li>Open <code>object_detector</code> config for changes and update <code>trt_preprocessor_input_dims</code>. This take frames dimensions in following format [height, width, channels]. If you have not resized the frames
+in gstreamer pipeline in <code>image_cache</code>, then get frame  dimensions (resolution) from camera settings. If you have resized frame in gstreamer pipeline, use them. In above example, we have resized frames 
+to 2560x1440, so we will update it [1440, 2560, 3].</li>
+<li>If you have enabled jpeg encoding in image cache, change <code>jpeg_encoded</code> to <code>true</code> in od config as well</li>
+<li>Save and exit od config</li>
+</ul>
+<h3 id="config-changes-in-violation-service_1">Config Changes in Violation Service</h3>
+<ul>
+<li>Configure Violation regions and rules</li>
+<li>Now, Run the services <code>sudo ./run-services.sh</code></li>
+</ul>
+<h3 id="check-your-site-id_1">Check your SITE ID</h3>
+<ul>
 <li>To check your site id, do <code>cat .env</code> and copy <code>SITE_ID</code></li>
 </ul>
               
