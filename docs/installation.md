@@ -79,11 +79,11 @@ Select Power Model. ID: 2
 `cd /media/sdcard/hazen-test/imagetars/hazenclient/`
 * Run the following command `sudo cp -r ./traj/* ./`
 * Make sure you have a working h264 or h265 encoded rtsp video stream url.
-* Change `camid` key in `service_configs/image_cache/config.yaml` to gstreamer pipeline with your rtsp stream as source. For Example:
+* Change `cam_id` key in `service_configs/image_cache/config.yaml` to gstreamer pipeline with your rtsp stream as source. For Example:
 For H265 encoded stream 
 
 ```
-camid: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
+cam_id: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
 ```
 
 * If there is any ALPR image-cache being used. Also change it's `camid` key in `service_configs/image_cache_alpr/config.yaml`.
@@ -96,11 +96,11 @@ camid: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depa
 `cd /media/sdcard/hazen-test/imagetars/hazenclient/`
 * Run the following command `sudo cp -r ./sbmp/* ./`
 * Make sure you have a working h264 or h265 encoded rtsp video stream url.
-* Change `camid` key in `service_configs/image_cache/config.yaml` to gstreamer pipeline with your rtsp stream as source. For Example:
+* Change `cam_id` key in `service_configs/image_cache/config.yaml` to gstreamer pipeline with your rtsp stream as source. For Example:
 For H265 encoded stream
 
 ```
-camid: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
+cam_id: "rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink"
 ```
 * Configure Violation regions and rules
 * Now, Run the services `sudo ./run-services.sh`
