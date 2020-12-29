@@ -201,10 +201,10 @@ Select Power Model. ID: 2
 <code>cd /media/sdcard/hazen-test/imagetars/hazenclient/</code></li>
 <li>Run the following command <code>sudo cp -r ./traj/* ./</code></li>
 <li>Make sure you have a working h264 or h265 encoded rtsp video stream url.</li>
-<li>Change <code>camid</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
+<li>Change <code>cam_id</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
 For H265 encoded stream </li>
 </ul>
-<pre><code>camid: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink&quot;
+<pre><code>cam_id: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink&quot;
 </code></pre>
 <ul>
 <li>If there is any ALPR image-cache being used. Also change it's <code>camid</code> key in <code>service_configs/image_cache_alpr/config.yaml</code>.</li>
@@ -217,10 +217,10 @@ For H265 encoded stream </li>
 <code>cd /media/sdcard/hazen-test/imagetars/hazenclient/</code></li>
 <li>Run the following command <code>sudo cp -r ./sbmp/* ./</code></li>
 <li>Make sure you have a working h264 or h265 encoded rtsp video stream url.</li>
-<li>Change <code>camid</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
+<li>Change <code>cam_id</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
 For H265 encoded stream</li>
 </ul>
-<pre><code>camid: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink&quot;
+<pre><code>cam_id: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink&quot;
 </code></pre>
 <ul>
 <li>Configure Violation regions and rules</li>
