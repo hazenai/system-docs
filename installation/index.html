@@ -217,13 +217,21 @@ For H265 encoded stream </li>
 <li>Move to following directory <code>cd $SD_CARD_MOUNTPOINT/hazen-test/imagetars/$COMPANY_NAME/</code>. For example, in this case, I will move to
 <code>cd /media/sdcard/hazen-test/imagetars/hazenclient/</code></li>
 <li>Run the following command <code>sudo cp -r ./sbmp/* ./</code></li>
-<li>Make sure you have a working h264 or h265 encoded rtsp video stream url.</li>
-<li>Change <code>cam_id</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
-For H265 encoded stream</li>
+<li>Open <code>image_cache</code> config. <code>sudo nano service_configs/image_cache/config.yaml</code></li>
+<li>If your have a working h264 or h265 encoded rtsp video stream url and want to use that then change <code>cam_id</code> key in <code>service_configs/image_cache/config.yaml</code> to gstreamer pipeline with your rtsp stream as source. For Example:
+For H265 encoded stream, following gstreamer pipeline will work (Also note: this pipeline is resizing frames to 1920x1080)</li>
 </ul>
-<pre><code>cam_id: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink&quot;
+<pre><code>cam_id: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! appsink&quot;
 </code></pre>
 <ul>
+<li>If you are using rtsp stream with gstreamer pipeline, update <code>encoder</code> key. Change its value from <code>ffmpeg</code> to <code>gstreamer</code></li>
+<li>If you are using rtsp stream, update <code>delay_for_file_ms</code> key. Make its value <code>0</code>. Because rtsp stream has built-in delay between frames. This value is used while running from video files and adding a
+delay to adjust the fps.</li>
+<li>save(CTRL+S) changes in image-cache config and exit (CTRL+X)</li>
+<li>Open <code>object_detector</code> config for changes and update <code>trt_preprocessor_input_dims</code>. This take frames dimensions in following format [height, width, channels]. If you have not resized the frames
+in gstreamer pipeline in <code>image_cache</code>, then get frame  dimensions (resolution) from camera settings. If you have resized frame in gstreamer pipeline, use them. In above example, we have resized frames 
+to 1920x1080, so we will update it [1080, 1920, 3].</li>
+<li>Save and exit od config.</li>
 <li>Configure Violation regions and rules</li>
 <li>Now, Run the services <code>sudo ./run-services.sh</code></li>
 </ul>
