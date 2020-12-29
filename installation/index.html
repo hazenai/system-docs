@@ -227,6 +227,7 @@ For H265 encoded stream, following gstreamer pipeline will work (Also note: this
 <li>If you are using rtsp stream with gstreamer pipeline, update <code>encoder</code> key. Change its value from <code>ffmpeg</code> to <code>gstreamer</code></li>
 <li>If you are using rtsp stream, update <code>delay_for_file_ms</code> key. Make its value <code>0</code>. Because rtsp stream has built-in delay between frames. This value is used while running from video files and adding a
 delay to adjust the fps.</li>
+<li>If you are using jpeg encoding in gstreamer pipeline, then change <code>jpeg_encoding</code> to <code>true</code></li>
 <li>save(CTRL+S) changes in image-cache config and exit (CTRL+X)</li>
 <li>Open <code>object_detector</code> config for changes and update <code>trt_preprocessor_input_dims</code>. This take frames dimensions in following format [height, width, channels]. If you have not resized the frames
 in gstreamer pipeline in <code>image_cache</code>, then get frame  dimensions (resolution) from camera settings. If you have resized frame in gstreamer pipeline, use them. In above example, we have resized frames 
