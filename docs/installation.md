@@ -12,7 +12,7 @@
 * Open terminal `CTRL + ALT + T`.
 * Check if `python3` is installed on device `python3 --version`. If not [follow this link to install](https://phoenixnap.com/kb/how-to-install-python-3-ubuntu)
 * Check if docker is installed and running `sudo docker info`. If docker is running, make sure it's `Server Version` is `19.03.6`
-* Add active user to `docker` group
+* Add current user to `docker` group
 ```bash
 sudo usermod -aG docker $USER
 ```
