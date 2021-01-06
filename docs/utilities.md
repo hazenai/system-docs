@@ -26,7 +26,7 @@ rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265
 ```
 rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw ! appsink
 ```
-> Testied On Verra Rudi-NX (Jan 5, 2020)
+> Tested On Verra Rudi-NX (Jan 5, 2020), For Latency Testing
 
 - **Stream from Video File, with H264, Resizing Frame and JPEG Encoding**
 ```
