@@ -22,6 +22,22 @@ rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph264depay ! h264
 rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! jpegenc ! image/jpeg ! appsink
 ```
 
+- **H264 Without Resizing,Formating and JPEG Encoding**
+```
+rtspsrc location=<rtsp_url> latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw ! appsink
+```
+> Testied On Verra Rudi-NX (Jan 5, 2020)
+
+- **Stream from Video File, with H264, Resizing Frame and JPEG Encoding**
+```
+filesrc location=/workspace/video.mp4 ! qtdemux ! h264parse ! omxh264dec ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080 ! jpegenc ! image/jpeg ! appsink
+```
+
+- **Stream from Video File, with H264 and JPEG Encoding**
+```
+filesrc location=/workspace/video.mp4 ! qtdemux ! h264parse ! omxh264dec ! nvvidconv interpolation-method=1 ! video/x-raw ! jpegenc ! image/jpeg ! appsink
+```
+
 ## Converting OD Engine From `.onnx` to `.trt`
 
 - For static engine
