@@ -136,6 +136,24 @@
 </ul>
 <pre><code>rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! jpegenc ! image/jpeg ! appsink
 </code></pre>
+<ul>
+<li><strong>H264 Without Resizing,Formating and JPEG Encoding</strong></li>
+</ul>
+<pre><code>rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw ! appsink
+</code></pre>
+<blockquote>
+<p>Testied On Verra Rudi-NX (Jan 5, 2020)</p>
+</blockquote>
+<ul>
+<li><strong>Stream from Video File, with H264, Resizing Frame and JPEG Encoding</strong></li>
+</ul>
+<pre><code>filesrc location=/workspace/video.mp4 ! qtdemux ! h264parse ! omxh264dec ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080 ! jpegenc ! image/jpeg ! appsink
+</code></pre>
+<ul>
+<li><strong>Stream from Video File, with H264 and JPEG Encoding</strong></li>
+</ul>
+<pre><code>filesrc location=/workspace/video.mp4 ! qtdemux ! h264parse ! omxh264dec ! nvvidconv interpolation-method=1 ! video/x-raw ! jpegenc ! image/jpeg ! appsink
+</code></pre>
 <h2 id="converting-od-engine-from-onnx-to-trt">Converting OD Engine From <code>.onnx</code> to <code>.trt</code></h2>
 <ul>
 <li>For static engine</li>
