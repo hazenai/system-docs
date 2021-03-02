@@ -7,14 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
-  
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Basic Installation - Deployment Documentation</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
-
-  <link rel="stylesheet" href="../css/theme.css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
   <script>
     // Current page data
@@ -25,7 +22,7 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -36,7 +33,6 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href=".." class="icon icon-home"> Deployment Documentation</a>
         <div role="search">
@@ -47,66 +43,62 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="..">Config Documentation</a>
-                    </li>
-                </ul>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Basic Installation</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#edge-script-installtion">Edge Script Installtion</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#running-the-edge-script">Running the Edge Script</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#running-the-services-trajectory-configuration">Running the services (Trajectory Configuration)</a>
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Config Documentation</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Basic Installation</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#basic-installation-guide-for-trajectory-and-sbmp-system-deployment">Basic Installation Guide for Trajectory and SBMP System Deployment</a></li>
+    
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-image-cache">Config Changes in Image Cache</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-object-detector">Config Changes in Object Detector</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-image-cache-alpr">Config Changes in Image Cache Alpr</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-violation-service">Config Changes in Violation Service</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#check-your-site-id">Check your SITE ID</a>
-    </li>
+        
+            <li><a class="toctree-l3" href="#prerequisites">Prerequisites</a></li>
+        
+            <li><a class="toctree-l3" href="#edge-script-installtion">Edge Script Installtion</a></li>
+        
+            <li><a class="toctree-l3" href="#running-the-edge-script">Running the Edge Script</a></li>
+        
+            <li><a class="toctree-l3" href="#running-the-services-trajectory-configuration">Running the services (Trajectory Configuration)</a></li>
+        
+            <li><a class="toctree-l3" href="#running-the-services-sbmp-configuration">Running the services (SBMP Configuration)</a></li>
+        
         </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#running-the-services-sbmp-configuration">Running the services (SBMP Configuration)</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-image-cache_1">Config Changes in Image Cache</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-object-detector_1">Config Changes in Object Detector</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#config-changes-in-violation-service_1">Config Changes in Violation Service</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#check-your-site-id_1">Check your SITE ID</a>
-    </li>
-        </ul>
-    </li>
+    
+
     </ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../site-rules-specs/">Site Rules Specification</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../flash/">Flashing Instructions</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../camera-calibration/">Camera Calibration</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../utilities/">Utilities</a>
-                    </li>
-                </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../site-rules-specs/">Site Rules Specification</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../flash/">Flashing Instructions</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../camera-calibration/">Camera Calibration</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../utilities/">Utilities</a>
+	    </li>
+          
+        </ul>
       </div>
-    </div>
+      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -131,7 +123,6 @@
       
     </li>
   </ul>
-  
   <hr/>
 </div>
           <div role="main">
@@ -152,13 +143,14 @@
 <li>Check if docker is installed and running <code>sudo docker info</code>. If docker is running, make sure it's <code>Server Version</code> is <code>19.03.6</code></li>
 <li>Add current user to <code>docker</code> group and then reboot</li>
 </ul>
-<pre><code class="language-bash">sudo usermod -aG docker $USER
+<pre><code class="bash">sudo usermod -aG docker $USER
 sudo reboot
 </code></pre>
+
 <ul>
 <li>Check if nvidia-container-runtime is installed <code>nvidia-container-runtime --version</code>. If it's not installed, then install</li>
 </ul>
-<pre><code class="language-bash"># Add the package repositories
+<pre><code class="bash"># Add the package repositories
 curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
@@ -166,6 +158,7 @@ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.li
 sudo apt-get update &amp;&amp; sudo apt-get install -y nvidia-container-toolkit nvidia-container-runtime
 sudo systemctl restart docker
 </code></pre>
+
 <ul>
 <li>Download Edge Scripts <code>wget GET_LINK_FROM_ABDULLAH</code></li>
 <li>Uncompress the downloaded file <code>tar -xvzf AutoDeployment-1.4.0.tar.gz</code></li>
@@ -177,33 +170,36 @@ sudo systemctl restart docker
 <li>Now, answer the questions asked in command line.</li>
 <li>Select storage disk. Choose SD card</li>
 </ul>
-<pre><code class="language-bash">NAME         SIZE      MOUNTPOINT       UUID
+<pre><code class="bash">NAME         SIZE      MOUNTPOINT       UUID
 mmcblk0p1    14G       /                eda65433-df7c-4de9-8c4b-9ab2865b4f24
 mmcblk1p1    234.7G    /media/sdcard    a10a85fe-a451-dd4c-b3b0-6862eb17eb56
 
 Choose which disk to use for deployment[1-2]: 2
 
 </code></pre>
+
 <ul>
 <li>Select problem type</li>
 </ul>
-<pre><code class="language-bash">Select the problem you want to deploy:
+<pre><code class="bash">Select the problem you want to deploy:
 0: Video Light Phase Detection
 1: SeatBelt/MobilePhone
 2: Trajectory
 [0-2]: 1
 
 </code></pre>
+
 <ul>
 <li>Type your company name</li>
 </ul>
-<pre><code class="language-bash">Please enter your company's name: hazenclient
+<pre><code class="bash">Please enter your company's name: hazenclient
 
 </code></pre>
+
 <ul>
 <li>Select Power mode on Jetson devices. choose with id=2</li>
 </ul>
-<pre><code class="language-bash">################ Collecting Hardware Info #######################
+<pre><code class="bash">################ Collecting Hardware Info #######################
 ## Power Model Selection on Jetson Devices ##
 ID=0 NAME=MODE_15W_2CORE
 ID=1 NAME=MODE_15W_4CORE
@@ -214,6 +210,7 @@ ID=4 NAME=MODE_10W_4CORE
 Select Power Model. ID: 2
 
 </code></pre>
+
 <ul>
 <li>Now, script will start installing system dependencies.</li>
 <li>After system dependencies installation, script will install required services. This process may take <code>20-30 mins</code>.</li>
@@ -232,6 +229,7 @@ For H265 encoded stream, following gstreamer pipeline will work (Also note: this
 </ul>
 <pre><code>cam_id: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! appsink&quot;
 </code></pre>
+
 <ul>
 <li>If you are using rtsp stream with gstreamer pipeline, update <code>encoder</code> key. Change its value from <code>ffmpeg</code> to <code>gstreamer</code></li>
 <li>If you are using rtsp stream, update <code>delay_for_file_ms</code> key. Make its value <code>0</code>. Because rtsp stream has built-in delay between frames. This value is used while running from video files and adding a
@@ -279,6 +277,7 @@ For H265 encoded stream, following gstreamer pipeline will work (Also note: this
 </ul>
 <pre><code>cam_id: &quot;rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=2560, height=1440, format=(string)BGRx ! appsink&quot;
 </code></pre>
+
 <ul>
 <li>If you are using rtsp stream with gstreamer pipeline, update <code>encoder</code> key. Change its value from <code>ffmpeg</code> to <code>gstreamer</code></li>
 <li>If you are using rtsp stream, update <code>delay_for_file_ms</code> key. Make its value <code>0</code>. Because rtsp stream has built-in delay between frames. This value is used while running from video files and adding a
@@ -325,7 +324,7 @@ to 2560x1440, so we will update it [1440, 2560, 3].</li>
     
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -335,7 +334,7 @@ to 2560x1440, so we will update it [1440, 2560, 3].</li>
 
   </div>
 
-  <div class="rst-versions" role="note" aria-label="versions">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -349,11 +348,6 @@ to 2560x1440, so we will update it [1440, 2560, 3].</li>
     <script>var base_url = '..';</script>
     <script src="../js/theme.js" defer></script>
       <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        };
-    </script>
 
 </body>
 </html>

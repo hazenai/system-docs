@@ -7,14 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
-  
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Site Rules Specification - Deployment Documentation</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
-
-  <link rel="stylesheet" href="../css/theme.css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
   <script>
     // Current page data
@@ -25,7 +22,7 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -36,7 +33,6 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href=".." class="icon icon-home"> Deployment Documentation</a>
         <div role="search">
@@ -47,54 +43,68 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="..">Config Documentation</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../installation/">Basic Installation</a>
-                    </li>
-                </ul>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Site Rules Specification</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#1-site-name">1. Site Name</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-constants">2. Constants:</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-states">3. States</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#4-zones">4. Zones</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#5-alpr-zones">5. ALPR Zones:</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#6-alias">6. Alias:</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#7-rules">7. Rules:</a>
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Config Documentation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Basic Installation</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Site Rules Specification</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#site-rules-specification">Site Rules Specification</a></li>
+    
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats</a>
-    </li>
+        
+            <li><a class="toctree-l3" href="#1-site-name">1. Site Name</a></li>
+        
+            <li><a class="toctree-l3" href="#2-constants">2. Constants:</a></li>
+        
+            <li><a class="toctree-l3" href="#3-states">3. States</a></li>
+        
+            <li><a class="toctree-l3" href="#4-zones">4. Zones</a></li>
+        
+            <li><a class="toctree-l3" href="#5-alpr-zones">5. ALPR Zones:</a></li>
+        
+            <li><a class="toctree-l3" href="#6-alias">6. Alias:</a></li>
+        
+            <li><a class="toctree-l3" href="#7-rules">7. Rules:</a></li>
+        
+            <li><a class="toctree-l3" href="#sample-configurations">Sample Configurations</a></li>
+        
         </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#sample-configurations">Sample Configurations</a>
-    </li>
+    
+
     </ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../flash/">Flashing Instructions</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../camera-calibration/">Camera Calibration</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../utilities/">Utilities</a>
-                    </li>
-                </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../flash/">Flashing Instructions</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../camera-calibration/">Camera Calibration</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../utilities/">Utilities</a>
+	    </li>
+          
+        </ul>
       </div>
-    </div>
+      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -119,7 +129,6 @@
       
     </li>
   </ul>
-  
   <hr/>
 </div>
           <div role="main">
@@ -174,7 +183,7 @@ Each zone involved in aliasing is preceded by a <code>$</code> sign.</p>
 <p>The first thing in a rule is its name followed by a sequence of rulelines. Rule name cannot have
 any spaces in it.</p>
 <p><strong>Sample Rule with 4 rulelines:</strong></p>
-<pre><code class="language-yaml">RunningRedLight:
+<pre><code class="yaml">RunningRedLight:
     RL1:
         Zone: $Enter
         Shot: a_shot
@@ -191,6 +200,7 @@ any spaces in it.</p>
     RL4:
         Zone: $Exit
 </code></pre>
+
 <p>Here, ‘RunningRedLight’ is the name of the rule. Rulelines are defined later on as <code>RL1</code>, <code>RL2</code>,
 <code>RL3</code> and <code>RL4</code>. This rule defines a violation RunningRedLight in which an object commits a
 violation if it passes from Enter (defined as an alias) to Zebra_Crossing while the light is red and
@@ -229,7 +239,7 @@ defined before the region used in the last ruleline of a rule.</li>
 <ul>
 <li><strong>Sample SeatBelt/MobilePhone site config with <code>DEFAULT</code> sitename.</strong></li>
 </ul>
-<pre><code class="language-yaml"># site_config.yaml
+<pre><code class="yaml"># site_config.yaml
 # I am a commented line
 DEFAULT:
     CONSTANTS:
@@ -255,10 +265,11 @@ DEFAULT:
                 States:
                     mobile_phone: 'on_call|using_mobile'
 </code></pre>
+
 <ul>
 <li><strong>Sample Trajectory site config of a Site at <code>Riyadh</code></strong></li>
 </ul>
-<pre><code class="language-yaml">RIYADH:         # Site Name
+<pre><code class="yaml">RIYADH:         # Site Name
     CONSTANTS:
         IMAGE_WIDTH: 1920
         IMAGE_HEIGHT: 1080
@@ -400,10 +411,11 @@ DEFAULT:
                 Duration: 1
                 Shot: b_shot
 </code></pre>
+
 <ul>
 <li><strong>Sample SB/MP site config for <code>AI_ACTIVE</code></strong></li>
 </ul>
-<pre><code class="language-yaml">AI_ACTIVE:
+<pre><code class="yaml">AI_ACTIVE:
     CONSTANTS:
         IMAGE_WIDTH: 1920
         IMAGE_HEIGHT: 1080
@@ -464,7 +476,7 @@ DEFAULT:
     
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -474,7 +486,7 @@ DEFAULT:
 
   </div>
 
-  <div class="rst-versions" role="note" aria-label="versions">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -488,11 +500,6 @@ DEFAULT:
     <script>var base_url = '..';</script>
     <script src="../js/theme.js" defer></script>
       <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        };
-    </script>
 
 </body>
 </html>

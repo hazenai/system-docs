@@ -7,14 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
-  
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Flashing Instructions - Deployment Documentation</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
-
-  <link rel="stylesheet" href="../css/theme.css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
   <script>
     // Current page data
@@ -25,7 +22,7 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -36,7 +33,6 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href=".." class="icon icon-home"> Deployment Documentation</a>
         <div role="search">
@@ -47,36 +43,56 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="..">Config Documentation</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../installation/">Basic Installation</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../site-rules-specs/">Site Rules Specification</a>
-                    </li>
-                </ul>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Flashing Instructions</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#axiomtek-ebox800-900-fl-jetson-tx2">Axiomtek eBOX800-900-FL (Jetson TX2)</a>
-    </li>
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Config Documentation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Basic Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../site-rules-specs/">Site Rules Specification</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Flashing Instructions</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#guidlines-to-flash-edge-devices">Guidlines to flash edge devices</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#axiomtek-ebox800-900-fl-jetson-tx2">Axiomtek eBOX800-900-FL (Jetson TX2)</a></li>
+        
+            <li><a class="toctree-l3" href="#roseek-lx1">ROSEEK LX1</a></li>
+        
+        </ul>
+    
+
     </ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../camera-calibration/">Camera Calibration</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../utilities/">Utilities</a>
-                    </li>
-                </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../camera-calibration/">Camera Calibration</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../utilities/">Utilities</a>
+	    </li>
+          
+        </ul>
       </div>
-    </div>
+      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -101,7 +117,6 @@
       
     </li>
   </ul>
-  
   <hr/>
 </div>
           <div role="main">
@@ -121,6 +136,14 @@
 <li>Wait till flashing is down.</li>
 <li>Remove tx2 from recovery mode and enable it to boot from internal eMMC by rebooting.</li>
 </ul>
+<h3 id="roseek-lx1"><a href="http://www.roseek.com/en/product/lynx1.html">ROSEEK LX1</a></h3>
+<ul>
+<li>Arrange a Host device (Running Windows)</li>
+<li>Get the Flash OS Image and Flash Instruction document from Roseek website or <a href="http://fileserver.lan/ToDropbox/Packages/dependencies/Roseek/05_ROSEEK_LX1_OS_Recover_Linux_Ubuntu16.04LTS_V202.zip">NAS</a></li>
+</ul>
+<p>Refernce Convo Posts
+* <a href="http://links.app.convo.com/v1/acc-19bc160f-eb8b-3525-e053-f3b6ee0aa38e/apps/6/messages/aX6oaqyoaBVLlAekfNOWTdeoZBMkfG#title=Roseek%252520Camera%252520-%252520Lynx%252520Series%252520%25257C%25257C%252520Documentation">Roseek Credentials</a>
+* <a href="http://links.app.convo.com/v1/acc-19bc160f-eb8b-3525-e053-f3b6ee0aa38e/apps/6/messages/19hq3UVcQhlK2bOv11oxHnbcxSpgW3#title=Roseek%252520Camera%252520-%252520Lynx%252520Series%252520-Documentations">Manuals and Instructions</a></p>
               
             </div>
           </div>
@@ -143,7 +166,7 @@
     
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -153,7 +176,7 @@
 
   </div>
 
-  <div class="rst-versions" role="note" aria-label="versions">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -167,11 +190,6 @@
     <script>var base_url = '..';</script>
     <script src="../js/theme.js" defer></script>
       <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        };
-    </script>
 
 </body>
 </html>

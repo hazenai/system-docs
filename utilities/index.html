@@ -7,14 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
-  
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Utilities - Deployment Documentation</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
-
-  <link rel="stylesheet" href="../css/theme.css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
   <script>
     // Current page data
@@ -25,7 +22,7 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
@@ -36,7 +33,6 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
         <a href=".." class="icon icon-home"> Deployment Documentation</a>
         <div role="search">
@@ -47,42 +43,60 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="..">Config Documentation</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../installation/">Basic Installation</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../site-rules-specs/">Site Rules Specification</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../flash/">Flashing Instructions</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../camera-calibration/">Camera Calibration</a>
-                    </li>
-                </ul>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Utilities</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#gstreamer-pipelines-for-image-cache">Gstreamer pipelines For Image Cache</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#converting-od-engine-from-onnx-to-trt">Converting OD Engine From .onnx to .trt</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#frequently-used-docker-and-docker-compose-commands">Frequently used docker and docker-compose commands</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#systemctl-commands">systemctl commands</a>
-    </li>
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Config Documentation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Basic Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../site-rules-specs/">Site Rules Specification</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../flash/">Flashing Instructions</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../camera-calibration/">Camera Calibration</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Utilities</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#utilities-snippets">Utilities / Snippets</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#gstreamer-pipelines-for-image-cache">Gstreamer pipelines For Image Cache</a></li>
+        
+            <li><a class="toctree-l3" href="#converting-od-engine-from-onnx-to-trt">Converting OD Engine From .onnx to .trt</a></li>
+        
+            <li><a class="toctree-l3" href="#frequently-used-docker-and-docker-compose-commands">Frequently used docker and docker-compose commands</a></li>
+        
+            <li><a class="toctree-l3" href="#systemctl-commands">systemctl commands</a></li>
+        
+        </ul>
+    
+
     </ul>
-                    </li>
-                </ul>
+	    </li>
+          
+        </ul>
       </div>
-    </div>
+      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -107,7 +121,6 @@
       
     </li>
   </ul>
-  
   <hr/>
 </div>
           <div role="main">
@@ -120,27 +133,32 @@
 </ul>
 <pre><code>rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! appsink
 </code></pre>
+
 <p>An Example of password protected RTSP url can be <code>rtsp://username:password@192.168.1.90:554/Streaming/Channels/101/</code></p>
 <ul>
 <li><strong>For H.264 (Resizing Frames to 1920x1080)</strong></li>
 </ul>
 <pre><code>rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! appsink
 </code></pre>
+
 <ul>
 <li><strong>H264 with JPEG Encoding Enabled and Resizing</strong></li>
 </ul>
 <pre><code>rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph264depay ! h264parse ! omxh264dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! jpegenc ! image/jpeg ! appsink
 </code></pre>
+
 <ul>
 <li><strong>H265 with JPEG Encoding Enabled and Resizing</strong></li>
 </ul>
 <pre><code>rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080, format=(string)BGRx ! jpegenc ! image/jpeg ! appsink
 </code></pre>
+
 <ul>
 <li><strong>H264 Without Resizing,Formating and JPEG Encoding</strong></li>
 </ul>
 <pre><code>rtspsrc location=&lt;rtsp_url&gt; latency=0 drop-on-latency=true ! rtph265depay ! h265parse ! omxh265dec  disable-dpb=true ! nvvidconv interpolation-method=1 ! video/x-raw ! appsink
 </code></pre>
+
 <blockquote>
 <p>Tested On Verra Rudi-NX (Jan 5, 2020), For Latency Testing</p>
 </blockquote>
@@ -149,71 +167,85 @@
 </ul>
 <pre><code>filesrc location=/workspace/video.mp4 ! qtdemux ! h264parse ! omxh264dec ! nvvidconv interpolation-method=1 ! video/x-raw, width=1920, height=1080 ! jpegenc ! image/jpeg ! appsink
 </code></pre>
+
 <ul>
 <li><strong>Stream from Video File, with H264 and JPEG Encoding</strong></li>
 </ul>
 <pre><code>filesrc location=/workspace/video.mp4 ! qtdemux ! h264parse ! omxh264dec ! nvvidconv interpolation-method=1 ! video/x-raw ! jpegenc ! image/jpeg ! appsink
 </code></pre>
+
 <h2 id="converting-od-engine-from-onnx-to-trt">Converting OD Engine From <code>.onnx</code> to <code>.trt</code></h2>
 <ul>
 <li>For static engine</li>
 </ul>
 <pre><code>/usr/src/tensorrt/bin/trtexec --onnx=/workspace/yolov3_torch1.onnx --saveEngine=./yolov3_torch1.trt --fp16 --verbose --workspace=2048
 </code></pre>
+
 <ul>
 <li>For dynamic shape engine</li>
 </ul>
 <pre><code>/usr/src/tensorrt/bin/trtexec --onnx=./engine/epoch99sim.onnx --saveEngine=./engine/epoch99sim.trt --fp16 --verbose --workspace=2028 --explicitBatch --optShapes=input:1x3x256x448 --minShapes=input:1x3x256x448 --maxShapes=input:128x3x256x448
 </code></pre>
+
 <h2 id="frequently-used-docker-and-docker-compose-commands">Frequently used <code>docker</code> and <code>docker-compose</code> commands</h2>
 <ul>
 <li>To pull images from docker registry</li>
 </ul>
 <pre><code>docker-compose pull
 </code></pre>
+
 <ul>
 <li>To start all services</li>
 </ul>
 <pre><code>docker-compose --compatibility up -d
 </code></pre>
+
 <ul>
 <li>To Shutdown the system</li>
 </ul>
 <pre><code>docker-compose --compatibility down --volume
 </code></pre>
+
 <ul>
 <li>To Restart single or multiple service</li>
 </ul>
 <pre><code>docker-compose --compatibility restart &lt;service_name1&gt; &lt;service_name2&gt; ...
 </code></pre>
+
 <p>For Example to restart image cache service:</p>
 <pre><code>docker-compose --compatibility restart image-cache
 </code></pre>
+
 <ul>
 <li>To Stop a service</li>
 </ul>
 <pre><code>docker-compose --compatibility stop &lt;service_name&gt;
 </code></pre>
+
 <ul>
 <li>To Start a service</li>
 </ul>
 <pre><code>docker-compose --compatibility start &lt;service_name&gt; 
 </code></pre>
+
 <ul>
 <li>To see logs of a service</li>
 </ul>
 <pre><code>docker logs -f &lt;container_name&gt;
 </code></pre>
+
 <ul>
 <li>To see status of services</li>
 </ul>
 <pre><code>docker ps
 </code></pre>
+
 <ul>
 <li>To see system resource usage of services</li>
 </ul>
 <pre><code>sudo docker stats
 </code></pre>
+
 <h2 id="systemctl-commands"><code>systemctl</code> commands</h2>
 <p>systemctl is part of systemd which is a service managment tool responsible for starting services on boot and controlling the state of these services later on.
 Following services are being run as Systemd services and systemctl will be used to control them.</p>
@@ -224,12 +256,15 @@ Following services are being run as Systemd services and systemctl will be used 
 <p><strong>Check status of a service</strong></p>
 <pre><code>sudo systemctl status &lt;service&gt;
 </code></pre>
+
 <p><strong>Restart a service</strong></p>
 <pre><code>sudo systemctl restart &lt;service&gt;
 </code></pre>
+
 <p><strong>Stop a service</strong></p>
 <pre><code>sudo systemctl stop &lt;service&gt;
 </code></pre>
+
 <p><strong>Enable service to be started on boot</strong></p>
 <pre><code>sudo systemctl enable &lt;service&gt;
 </code></pre>
@@ -253,7 +288,7 @@ Following services are being run as Systemd services and systemctl will be used 
     
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
         </div>
@@ -263,7 +298,7 @@ Following services are being run as Systemd services and systemctl will be used 
 
   </div>
 
-  <div class="rst-versions" role="note" aria-label="versions">
+  <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
@@ -275,11 +310,6 @@ Following services are being run as Systemd services and systemctl will be used 
     <script>var base_url = '..';</script>
     <script src="../js/theme.js" defer></script>
       <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        };
-    </script>
 
 </body>
 </html>
